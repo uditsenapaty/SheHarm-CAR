@@ -59,6 +59,8 @@ def main() -> int:
     parser.add_argument("--dev-ratio", type=float, default=0.1)
     parser.add_argument("--allow-missing-ocr", action="store_true",
                         help="Keep rows that have no OCR row yet (for partial smoke runs)")
+    parser.add_argument("--prior-labels", type=Path, default=Path("dataset/mami_sublabels.csv"),
+                        help="Rows that arrive with their own harmfulness/category labels")
     args = parser.parse_args()
 
     annotations = pd.read_csv(args.annotations)
@@ -72,6 +74,19 @@ def main() -> int:
     else:
         raise SystemExit(f"{args.ocr} not found. Run scripts/ocr_and_span.py first, or pass --allow-missing-ocr.")
 
+    # Part of the corpus arrives with its own harmfulness and category labels. Those are
+    # kept as-is; annotator 1 still supplies the women-related target and the rationale,
+    # which the imported labels do not carry.
+    prior = {}
+    if args.prior_labels.exists():
+        for _, row in pd.read_csv(args.prior_labels).iterrows():
+            direct = any(int(row[k]) for k in ("shaming", "objectification", "violence"))
+            prior[row["filename"]] = {
+                "harmfulness": "Explicit-Harm" if direct else "Implicit-Harm",
+                "harm_category": row["category"],
+            }
+        print(f"{len(prior)} rows carry pre-existing harmfulness/category labels")
+
     merged = annotations.merge(ocr, on="filename", how="left")
     before = len(merged)
     if not args.allow_missing_ocr:
@@ -83,8 +98,12 @@ def main() -> int:
 
     rows = []
     for _, row in merged.iterrows():
-        harmfulness = normalize_harmfulness(row["harm_type"])
-        category = normalize_category(row["harm_category"], harmfulness)
+        if row["filename"] in prior:
+            harmfulness = prior[row["filename"]]["harmfulness"]
+            category = prior[row["filename"]]["harm_category"]
+        else:
+            harmfulness = normalize_harmfulness(row["harm_type"])
+            category = normalize_category(row["harm_category"], harmfulness)
         raw_target = str(row["women-related target"]).lower().strip()
         concept = alias_map.get(raw_target, no_target)
 
@@ -129,6 +148,7 @@ def main() -> int:
         "rows_with_grounded_span": grounded,
         "span_grounding_rate": round(grounded / max(len(frame), 1) * 100, 2),
         "rows_with_empty_ocr": int((frame["ocr_text"].str.len() == 0).sum()),
+        "rows_with_prior_labels": int(sum(1 for r in rows if r["image_path"] in prior)),
         **split_notes,
     }
     (args.results_dir / "table3_data_splits.json").write_text(json.dumps(statistics, indent=2), encoding="utf-8")
