@@ -68,7 +68,9 @@ train:
   # specified; only batch composition and which weights get scored change.
   balanced_sampling: false    # inverse joint (harmfulness x category) frequency
   balance_power: 1.0
+  balance_include_target: false   # the target is the most skewed label
   ema_decay: 0.0
+  lr_schedule: linear
 
 eval:
   bertscore_model: roberta-large

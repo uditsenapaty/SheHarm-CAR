@@ -18,7 +18,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from transformers import get_linear_schedule_with_warmup
+from transformers import get_cosine_schedule_with_warmup, get_linear_schedule_with_warmup
 
 from .evaluate import evaluate
 
@@ -41,10 +41,16 @@ class WeightEMA:
 
     The paper does not specify an averaging scheme; this only changes *which* weights are
     scored, never the objective, the schedule, or the checkpoint-selection rule.
+
+    The decay must fit the run. This model trains for ~1.3k steps, so a decay of 0.999 -
+    an effective window of ~1000 steps - leaves 27% of the averaged weights sitting on the
+    random initialisation and makes every metric worse. The decay is additionally warmed up
+    as min(decay, (1+t)/(10+t)) so the first evaluations are not averages over noise.
     """
 
-    def __init__(self, model: nn.Module, decay: float = 0.999):
+    def __init__(self, model: nn.Module, decay: float = 0.99):
         self.decay = decay
+        self.step = 0
         self.shadow = {
             name: parameter.detach().clone().float()
             for name, parameter in model.named_parameters() if parameter.requires_grad
@@ -53,9 +59,11 @@ class WeightEMA:
 
     @torch.no_grad()
     def update(self, model: nn.Module) -> None:
+        self.step += 1
+        decay = min(self.decay, (1.0 + self.step) / (10.0 + self.step))
         for name, parameter in model.named_parameters():
             if name in self.shadow:
-                self.shadow[name].mul_(self.decay).add_(parameter.detach().float(), alpha=1.0 - self.decay)
+                self.shadow[name].mul_(decay).add_(parameter.detach().float(), alpha=1.0 - decay)
 
     @torch.no_grad()
     def apply_to(self, model: nn.Module) -> None:
@@ -75,12 +83,17 @@ class WeightEMA:
         self.backup = {}
 
 
-def balanced_sampler(dataset, power: float = 1.0, seed: int = 42):
-    """Sample inversely to joint (harmfulness, harm-category) frequency.
+def balanced_sampler(dataset, power: float = 1.0, seed: int = 42, include_target: bool = True):
+    """Sample inversely to joint label frequency.
 
-    Harm-F1 and Cat-F1 are macro averages, so rare classes count as much as `Non-Harm`.
+    Every headline metric is a macro average, so a rare class counts as much as `Non-Harm`.
     The paper fixes the losses but says nothing about the sampler, so mini-batch composition
     is a free lever: the objective stays exactly -sum log p.
+
+    The target is folded into the key because it is the most skewed of the three - one
+    concept covers over half the corpus - and Joint-F1 is a conjunction, so it is capped by
+    whichever component is weakest. Target frequency is damped by a square root so that
+    balancing it does not overwhelm the harmfulness and category balance.
     """
     from collections import Counter
 
@@ -90,6 +103,10 @@ def balanced_sampler(dataset, power: float = 1.0, seed: int = 42):
     keys = (frame["harmfulness"].astype(str) + "|" + frame["harm_category"].astype(str)).tolist()
     counts = Counter(keys)
     weights = [(1.0 / counts[key]) ** power for key in keys]
+    if include_target and "target_concept" in frame.columns:
+        target_keys = frame["target_concept"].astype(str).tolist()
+        target_counts = Counter(target_keys)
+        weights = [w * (1.0 / target_counts[k]) ** (power * 0.5) for w, k in zip(weights, target_keys)]
     generator = torch.Generator().manual_seed(seed)
     return WeightedRandomSampler(weights, num_samples=len(frame), replacement=True, generator=generator)
 
@@ -114,7 +131,9 @@ class TrainConfig:
     # Paper-silent knobs (see configs/paper_literal.yaml to disable all of them).
     balanced_sampling: bool = True
     balance_power: float = 1.0
-    ema_decay: float = 0.999   # 0 disables EMA
+    balance_include_target: bool = True
+    ema_decay: float = 0.99    # 0 disables EMA; must fit the run length
+    lr_schedule: str = "cosine"   # paper-silent: it fixes the optimizer, not the decay shape
 
 
 def build_optimizer(model: nn.Module, config: TrainConfig):
@@ -177,7 +196,9 @@ def train_one_epoch(model, loader, optimizer, scheduler, scaler, device, config:
 def fit(model, train_dataset, dev_dataset, tokenizer, config: TrainConfig, device: torch.device) -> dict:
     enable_determinism(config.seed)
     generator = torch.Generator().manual_seed(config.seed)
-    sampler = balanced_sampler(train_dataset, config.balance_power, config.seed) if config.balanced_sampling else None
+    sampler = balanced_sampler(
+        train_dataset, config.balance_power, config.seed, config.balance_include_target
+    ) if config.balanced_sampling else None
     train_loader = DataLoader(
         train_dataset, batch_size=config.batch_size,
         shuffle=(sampler is None), sampler=sampler, generator=generator,
@@ -190,7 +211,11 @@ def fit(model, train_dataset, dev_dataset, tokenizer, config: TrainConfig, devic
 
     optimizer = build_optimizer(model, config)
     total_steps = max(1, len(train_loader) * config.epochs)
-    scheduler = get_linear_schedule_with_warmup(optimizer, int(total_steps * config.warmup_ratio), total_steps)
+    warmup_steps = int(total_steps * config.warmup_ratio)
+    make_schedule = (
+        get_cosine_schedule_with_warmup if config.lr_schedule == "cosine" else get_linear_schedule_with_warmup
+    )
+    scheduler = make_schedule(optimizer, warmup_steps, total_steps)
     scaler = torch.amp.GradScaler("cuda", enabled=config.amp and device.type == "cuda")
 
     output_dir = Path(config.output_dir)

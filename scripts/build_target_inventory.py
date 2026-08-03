@@ -74,6 +74,16 @@ MANUAL_ALIASES = {
 }
 
 
+# Bare head nouns. "woman" is a subset of "woman in bikini", "fat woman", "angry woman" and
+# hundreds more, so on word overlap it wins every one of them and swallows the modifier that
+# carries the actual information. When a string says more than the head noun, the generic
+# concepts are removed from candidacy so the modifier decides the match.
+GENERIC_CONCEPTS = {
+    "woman", "women", "womans", "womens", "female", "females", "girl", "girls",
+    "lady", "ladies", "chick", "chicks", "gal", "gals", "babe", "babes", "she", "her",
+}
+
+
 def content_words(text: str) -> set[str]:
     return {w for w in re.split(r"[^a-z0-9]+", text.lower()) if w and w not in STOPWORDS}
 
@@ -106,6 +116,9 @@ def main() -> int:
     parser.add_argument("--threshold", type=float, default=0.55)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--report-top", type=int, default=20)
+    parser.add_argument("--concept-floor", type=float, default=0.45,
+                        help="Below this match quality a modified string takes its target type "
+                             "rather than the best of a bad set of concepts")
     parser.add_argument("--min-support", type=int, default=20,
                         help="Concepts with fewer rows back off to their ontology target type. "
                              "0 keeps the full 126-way inventory.")
@@ -130,18 +143,35 @@ def main() -> int:
     cosine = raw_vectors @ concept_vectors.t()
 
     concept_words = [content_words(name) for name in names]
+    # Modifier-only view of each concept: "woman on the street" -> {street}. Matching on the
+    # head noun is what let one concept swallow hundreds of unrelated strings.
+    concept_modifiers = [words - GENERIC_CONCEPTS for words in concept_words]
+    parent_of = {concept["name"]: concept["target_type"] for concept in concepts}
     alias_map: dict[str, str] = {}
     scores_report: dict[str, float] = {}
+    generic_index = torch.tensor([name in GENERIC_CONCEPTS for name in names])
     for row, value in enumerate(unique):
         words = content_words(value)
         lexical = torch.tensor([jaccard(words, target) for target in concept_words])
         combined = 0.5 * cosine[row] + 0.5 * lexical
+        modifiers = words - GENERIC_CONCEPTS
+        specific = bool(modifiers)
+        if specific:
+            # A concept is only a candidate if its own modifier overlaps this one's, so
+            # "wonder woman" cannot match "woman on the street" on the shared head noun.
+            candidate = torch.tensor([bool(modifiers & concept) for concept in concept_modifiers])
+            combined = combined.masked_fill(generic_index | ~candidate, -1.0)
         best = int(combined.argmax())
         score = float(combined[best])
         if value in MANUAL_ALIASES:              # pinned high-frequency string
             alias_map[value], scores_report[value] = MANUAL_ALIASES[value], 1.0
         elif is_explicitly_not_women(value):     # "man", "male character", "cat"
             alias_map[value], scores_report[value] = NO_TARGET, score
+        elif specific and score < args.concept_floor:
+            # Nothing matched the modifier. Fall back to the type of the semantically nearest
+            # concept rather than forcing a bad concept-level answer.
+            nearest = int(cosine[row].masked_fill(generic_index, -1.0).argmax())
+            alias_map[value], scores_report[value] = parent_of[names[nearest]], score
         elif value in names:                     # exact inventory hit
             alias_map[value], scores_report[value] = value, 1.0
         elif score >= args.threshold:
@@ -156,7 +186,7 @@ def main() -> int:
     # examples and macro-F1 measures noise rather than skill. The ontology already defines
     # the hierarchy (Female-Role, Female-Relationship, ...), so the fallback is principled
     # rather than an arbitrary bucket. The ontology itself is unchanged.
-    parent = {concept["name"]: concept["target_type"] for concept in concepts}
+    parent = parent_of
     if args.min_support > 0:
         support = Counter(raw_values.map(alias_map))
         collapsed = {name for name, count in support.items()

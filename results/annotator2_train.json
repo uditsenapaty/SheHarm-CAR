@@ -8,121 +8,121 @@
     {
       "seed": 42,
       "metrics": {
-        "target_f1": 2.320075757575758,
-        "harm_f1": 52.77280994396064,
-        "category_f1": 25.259047456469787,
-        "joint": 19.37321937321937,
-        "joint_harmful": 9.264305177111716,
-        "harm_f1_Explicit-Harm": 56.573705179282875,
-        "harm_f1_Implicit-Harm": 39.655172413793096,
-        "harm_f1_Non-Harm": 62.089552238805965,
-        "category_f1_Sexual-Harassment": 31.683168316831683,
-        "category_f1_Violence": 18.750000000000004,
-        "category_f1_Misogyny": 55.172413793103445,
-        "category_f1_Appearance-Attack": 20.689655172413794,
-        "category_f1_Character-Assassination": 0.0,
-        "bertscore": 81.09359658002174,
-        "cf_faithfulness": 50.70767962499514,
-        "cf_necessity": 6.828464663095689,
-        "cf_stability": 94.58689458689459,
-        "mean_confidence_drop": 2.653924573181022,
-        "best_dev_mean_f1": 25.929917588912332
+        "target_f1": 22.03121968000028,
+        "harm_f1": 47.09973369534202,
+        "category_f1": 45.604187558317186,
+        "joint": 20.51282051282051,
+        "joint_harmful": 9.638554216867469,
+        "harm_f1_Explicit-Harm": 46.45161290322581,
+        "harm_f1_Implicit-Harm": 25.531914893617024,
+        "harm_f1_Non-Harm": 69.31567328918322,
+        "category_f1_Sexual-Harassment": 63.27683615819208,
+        "category_f1_Violence": 27.586206896551722,
+        "category_f1_Misogyny": 63.15789473684211,
+        "category_f1_Appearance-Attack": 24.000000000000004,
+        "category_f1_Character-Assassination": 50.0,
+        "bertscore": 93.72567172743317,
+        "cf_faithfulness": 53.9116962246253,
+        "cf_necessity": 9.532794158652324,
+        "cf_stability": 98.29059829059828,
+        "mean_confidence_drop": 2.847381810686867,
+        "best_dev_mean_f1": 37.30664017239089
       }
     }
   ],
   "summary": {
     "bertscore": {
-      "mean": 81.09359658002174,
+      "mean": 93.72567172743317,
       "std": 0.0,
       "n": 1
     },
     "best_dev_mean_f1": {
-      "mean": 25.929917588912332,
+      "mean": 37.30664017239089,
       "std": 0.0,
       "n": 1
     },
     "category_f1": {
-      "mean": 25.259047456469787,
+      "mean": 45.604187558317186,
       "std": 0.0,
       "n": 1
     },
     "category_f1_Appearance-Attack": {
-      "mean": 20.689655172413794,
+      "mean": 24.000000000000004,
       "std": 0.0,
       "n": 1
     },
     "category_f1_Character-Assassination": {
-      "mean": 0.0,
+      "mean": 50.0,
       "std": 0.0,
       "n": 1
     },
     "category_f1_Misogyny": {
-      "mean": 55.172413793103445,
+      "mean": 63.15789473684211,
       "std": 0.0,
       "n": 1
     },
     "category_f1_Sexual-Harassment": {
-      "mean": 31.683168316831683,
+      "mean": 63.27683615819208,
       "std": 0.0,
       "n": 1
     },
     "category_f1_Violence": {
-      "mean": 18.750000000000004,
+      "mean": 27.586206896551722,
       "std": 0.0,
       "n": 1
     },
     "cf_faithfulness": {
-      "mean": 50.70767962499514,
+      "mean": 53.9116962246253,
       "std": 0.0,
       "n": 1
     },
     "cf_necessity": {
-      "mean": 6.828464663095689,
+      "mean": 9.532794158652324,
       "std": 0.0,
       "n": 1
     },
     "cf_stability": {
-      "mean": 94.58689458689459,
+      "mean": 98.29059829059828,
       "std": 0.0,
       "n": 1
     },
     "harm_f1": {
-      "mean": 52.77280994396064,
+      "mean": 47.09973369534202,
       "std": 0.0,
       "n": 1
     },
     "harm_f1_Explicit-Harm": {
-      "mean": 56.573705179282875,
+      "mean": 46.45161290322581,
       "std": 0.0,
       "n": 1
     },
     "harm_f1_Implicit-Harm": {
-      "mean": 39.655172413793096,
+      "mean": 25.531914893617024,
       "std": 0.0,
       "n": 1
     },
     "harm_f1_Non-Harm": {
-      "mean": 62.089552238805965,
+      "mean": 69.31567328918322,
       "std": 0.0,
       "n": 1
     },
     "joint": {
-      "mean": 19.37321937321937,
+      "mean": 20.51282051282051,
       "std": 0.0,
       "n": 1
     },
     "joint_harmful": {
-      "mean": 9.264305177111716,
+      "mean": 9.638554216867469,
       "std": 0.0,
       "n": 1
     },
     "mean_confidence_drop": {
-      "mean": 2.653924573181022,
+      "mean": 2.847381810686867,
       "std": 0.0,
       "n": 1
     },
     "target_f1": {
-      "mean": 2.320075757575758,
+      "mean": 22.03121968000028,
       "std": 0.0,
       "n": 1
     }

@@ -28,7 +28,7 @@ model:
   freeze_encoders: false     # encoders are fine-tuned at 1e-5 (Table 3)
   cf_margin: 0.10
   # Paper-silent: it specifies bidirectional cross-modal attention but not its depth.
-  cross_modal_layers: 2
+  cross_modal_layers: 3
 
   # Ablation switches (Table `tab:ablation`); all true in the full model.
   use_target_conditioning: true
@@ -55,20 +55,22 @@ train:
   encoder_lr: 1.0e-5
   new_lr: 5.0e-4
   weight_decay: 0.01
-  warmup_ratio: 0.1
+  warmup_ratio: 0.06
   grad_clip: 1.0
   num_workers: 2
   amp: true
   seed: 42
   output_dir: runs/ablation/no_confidence_gate
   selection_metrics: [target_f1, harm_f1, category_f1, bertscore]
-  eval_bertscore_during_training: false
+  eval_bertscore_during_training: true   # the paper selects on all four task metrics
   log_every: 50
   # Paper-silent knobs. The objective, schedule and checkpoint rule stay exactly as
   # specified; only batch composition and which weights get scored change.
   balanced_sampling: true    # inverse joint (harmfulness x category) frequency
   balance_power: 1.0
-  ema_decay: 0.999
+  balance_include_target: true   # the target is the most skewed label
+  ema_decay: 0.99          # window must fit ~1.3k total steps
+  lr_schedule: cosine
 
 eval:
   bertscore_model: roberta-large

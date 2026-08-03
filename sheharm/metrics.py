@@ -136,6 +136,9 @@ def bertscore(predictions: list[str], references: list[str], model_type: str = "
         return _bertscore_fallback(predictions, references, model_type, device, batch_size)
 
 
+_FALLBACK_CACHE: dict = {}
+
+
 def _bertscore_fallback(predictions, references, model_type, device, batch_size) -> float:
     """Greedy cosine matching over contextual embeddings — the BERTScore F1 definition."""
     import torch
@@ -143,8 +146,14 @@ def _bertscore_fallback(predictions, references, model_type, device, batch_size)
 
     name = "roberta-base" if model_type == "roberta-large" else model_type
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-    tokenizer = AutoTokenizer.from_pretrained(name)
-    model = AutoModel.from_pretrained(name).to(device).eval()
+    # Cached: checkpoint selection scores rationales every epoch, and reloading the encoder
+    # each time costs more than the scoring itself.
+    key = (name, str(device))
+    if key not in _FALLBACK_CACHE:
+        _FALLBACK_CACHE[key] = (
+            AutoTokenizer.from_pretrained(name), AutoModel.from_pretrained(name).to(device).eval()
+        )
+    tokenizer, model = _FALLBACK_CACHE[key]
 
     def embed(texts):
         outputs = []
@@ -164,7 +173,6 @@ def _bertscore_fallback(predictions, references, model_type, device, batch_size)
         precision = similarity.max(dim=2).values.mul(predicted_mask).sum(1) / predicted_mask.sum(1).clamp_min(1)
         recall = similarity.max(dim=1).values.mul(reference_mask).sum(1) / reference_mask.sum(1).clamp_min(1)
         scores.extend((2 * precision * recall / (precision + recall).clamp_min(1e-8)).tolist())
-    del model
     return float(np.mean(scores)) * 100.0
 
 

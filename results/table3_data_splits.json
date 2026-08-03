@@ -76,8 +76,8 @@
       "train": 175
     }
   },
-  "target_concepts_attested": 18,
-  "rows_without_target_concept": 219,
+  "target_concepts_attested": 17,
+  "rows_without_target_concept": 8,
   "rows_with_grounded_span": 1494,
   "span_grounding_rate": 42.69,
   "rows_with_empty_ocr": 19,
