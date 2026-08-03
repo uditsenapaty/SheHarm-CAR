@@ -1,0 +1,32 @@
+[paper] roberta         downloaded
+[code ] roberta         no public code found
+[paper] vilt            downloaded
+[code ] vilt            1.5 MB
+[paper] hate_clipper    downloaded
+[code ] hate_clipper    18.3 MB
+[paper] llava           downloaded
+[code ] llava           20.3 MB
+[paper] internvl        downloaded
+[code ] internvl        70.9 MB
+[paper] llama32_vision  downloaded
+[code ] llama32_vision  7.8 MB
+[paper] qwen25_vl       downloaded
+[code ] qwen25_vl       103.1 MB
+[paper] kermit          MANUAL (not on arXiv)
+[code ] kermit          no public code found
+[paper] kid_vlm         downloaded
+[code ] kid_vlm         no public code found
+[paper] intmeme         downloaded
+[code ] intmeme         0.5 MB
+[paper] explainhm       downloaded
+[code ] explainhm       6.4 MB
+[paper] sgot_r1         MANUAL (not on arXiv)
+[code ] sgot_r1         no public code found
+[paper] fhm             downloaded
+[code ] fhm             no public code found
+[paper] mami            MANUAL (not on arXiv)
+[code ] mami            no public code found
+[paper] harmeme         downloaded
+[code ] harmeme         no public code found
+
+Wrote referred_clones/MANIFEST.md

@@ -1,0 +1,23 @@
+{
+  "config": "configs/default.yaml",
+  "settings": {
+    "Encoders": "clip-vit-base-patch32; roberta-base",
+    "Input size": "$224\\times224$; 128 OCR tokens",
+    "Hidden size / dropout": "768 / 0.2",
+    "Cross-modal layers": "2",
+    "Ontology retrieval": "$K=5$, $\\tau=0.07$, 10 hard negatives",
+    "Rule threshold": "0.6",
+    "Encoder learning rate": "$1\\times10^{-5}$",
+    "New-layer learning rate": "$5\\times10^{-4}$",
+    "Weight decay": "0.01",
+    "Batch / epochs / patience": "32 / 15 / 5",
+    "Rationale decoding": "Beam size 4; maximum 64 tokens",
+    "Task-loss weights": "$\\lambda_{\\mathrm{harm}}=1.0$, $\\lambda_{\\mathrm{cat}}=1.0$, $\\lambda_{\\mathrm{rat}}=1.0$",
+    "Auxiliary-loss weights": "$\\lambda_{\\mathrm{align}}=0.1$, $\\lambda_{\\mathrm{cons}}=0.1$, $\\lambda_{\\mathrm{cf}}=0.2$",
+    "Counterfactual invariance": "$\\lambda_{\\mathrm{inv}}=0.5$",
+    "Optimizer / precision": "AdamW / mixed precision",
+    "Balanced sampling": "yes",
+    "Weight EMA": "0.999",
+    "Runs / hardware": "3 seeds / single GPU"
+  }
+}

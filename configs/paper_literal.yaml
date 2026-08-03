@@ -1,0 +1,75 @@
+# Paper-literal configuration: every paper-silent knob disabled.
+# Use this to measure what the free hyperparameters contribute.
+# Every value here is taken from paper Table `tab:hyperparameters` / Section
+# `subsec:implementation`. Do not edit for ablations — override with configs/ablations/*.yaml.
+
+data:
+  csv: dataset/sheharm_meme.csv
+  image_root: dataset/images
+  target_inventory: dataset/target_inventory.json
+  max_text_len: 128          # "OCR sequences are truncated to 128 tokens"
+  max_rationale_len: 64      # "maximum output length of 64 tokens"
+
+knowledge:
+  ontology: knowledge/ontology.json
+  rules: knowledge/rules.json
+  embedding_cache: runs/_cache/concept_embeddings.pt
+
+model:
+  vision_model: openai/clip-vit-base-patch32   # "CLIP ViT-B/32 is used as the visual encoder"
+  text_model: roberta-base                     # "RoBERTa-base encodes the OCR text"
+  hidden_size: 768
+  dropout: 0.2
+  top_k: 5                   # "top-K = 5 ontology concepts"
+  temperature: 0.07          # "temperature tau = 0.07"
+  num_hard_negatives: 10     # "Ten hard-negative concepts are sampled"
+  rule_threshold: 0.60       # "validation-selected threshold of 0.60"
+  beam_size: 4               # "beam search with beam size 4"
+  freeze_encoders: false     # encoders are fine-tuned at 1e-5 (Table 3)
+  cf_margin: 0.10
+  # Paper-silent: it specifies bidirectional cross-modal attention but not its depth.
+  cross_modal_layers: 1
+
+  # Ablation switches (Table `tab:ablation`); all true in the full model.
+  use_target_conditioning: true
+  use_ontology_retrieval: true
+  use_exception_rules: true
+  use_confidence_gate: true
+  use_consistency_loss: true
+  use_counterfactual_loss: true
+
+loss:
+  lambda_harm: 1.0
+  lambda_cat: 1.0
+  lambda_rat: 1.0
+  lambda_align: 0.1
+  lambda_cons: 0.1
+  lambda_cf: 0.2
+  lambda_inv: 0.5
+  # L_tgt carries an implicit coefficient of 1.0.
+
+train:
+  epochs: 15
+  patience: 5
+  batch_size: 32
+  encoder_lr: 1.0e-5
+  new_lr: 5.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  grad_clip: 1.0
+  num_workers: 2
+  amp: true
+  seed: 42
+  output_dir: runs/paper_literal
+  selection_metrics: [target_f1, harm_f1, category_f1, bertscore]
+  eval_bertscore_during_training: false
+  log_every: 50
+  # Paper-silent knobs. The objective, schedule and checkpoint rule stay exactly as
+  # specified; only batch composition and which weights get scored change.
+  balanced_sampling: false    # inverse joint (harmfulness x category) frequency
+  balance_power: 1.0
+  ema_decay: 0.0
+
+eval:
+  bertscore_model: roberta-large
+  seeds: [42, 43, 44]        # "results are reported as the mean over three random seeds"

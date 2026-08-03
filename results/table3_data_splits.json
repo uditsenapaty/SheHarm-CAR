@@ -1,0 +1,79 @@
+{
+  "total": 910,
+  "splits": {
+    "train": 726,
+    "test": 92,
+    "dev": 92
+  },
+  "harmfulness": {
+    "Non-Harm": 687,
+    "Implicit-Harm": 141,
+    "Explicit-Harm": 82
+  },
+  "harm_category": {
+    "None": 687,
+    "Sexual-Harassment": 163,
+    "Misogyny": 33,
+    "Appearance-Attack": 19,
+    "Violence": 8
+  },
+  "split_by_harmfulness": {
+    "Explicit-Harm": {
+      "train": 64,
+      "dev": 9,
+      "test": 9,
+      "Total": 82
+    },
+    "Implicit-Harm": {
+      "train": 113,
+      "dev": 14,
+      "test": 14,
+      "Total": 141
+    },
+    "Non-Harm": {
+      "train": 549,
+      "dev": 69,
+      "test": 69,
+      "Total": 687
+    },
+    "Total": {
+      "train": 726,
+      "dev": 92,
+      "test": 92,
+      "Total": 910
+    }
+  },
+  "split_by_category": {
+    "Appearance-Attack": {
+      "dev": 2,
+      "test": 2,
+      "train": 15
+    },
+    "Misogyny": {
+      "dev": 4,
+      "test": 4,
+      "train": 25
+    },
+    "None": {
+      "dev": 69,
+      "test": 69,
+      "train": 549
+    },
+    "Sexual-Harassment": {
+      "dev": 16,
+      "test": 16,
+      "train": 131
+    },
+    "Violence": {
+      "dev": 1,
+      "test": 1,
+      "train": 6
+    }
+  },
+  "target_concepts_attested": 54,
+  "rows_without_target_concept": 128,
+  "rows_with_grounded_span": 572,
+  "span_grounding_rate": 62.86,
+  "rows_with_empty_ocr": 11,
+  "strata_too_small_for_dev_test": {}
+}

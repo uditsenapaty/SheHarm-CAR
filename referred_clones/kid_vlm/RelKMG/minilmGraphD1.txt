@@ -1,0 +1,115 @@
+/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Using temp folder: /scratch/rahul.garg/conceptNet/tmp/QpG5BUtHgs
+/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Processing 0:   0%|          | 0/1214 [00:00<?, ?it/s]/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+Processing 1:   0%|          | 0/1214 [00:00<?, ?it/s][A/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+
+Processing 2:   0%|          | 0/1214 [00:00<?, ?it/s][A[A/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+
+
+Processing 3:   0%|          | 0/1214 [00:00<?, ?it/s][A[A[A                                                      Process Process-1:
+Traceback (most recent call last):
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 260, in process_graphs
+    neighbours_with_scores = get_multihop_neighbors_with_minilm(G, capt, model=model, top_k=top_k, max_hops=hops)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 202, in get_multihop_neighbors_with_minilm
+    ranked_nodes_with_scores = rank_nodes_by_similarity(query_sentence, model, list(graph.nodes), top_k)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in rank_nodes_by_similarity
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in <listcomp>
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+KeyError: nan
+/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+
+
+
+Processing 4:   0%|          | 0/1214 [00:00<?, ?it/s][A[A[A[A/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+                                                      [AProcess Process-2:
+Traceback (most recent call last):
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 260, in process_graphs
+    neighbours_with_scores = get_multihop_neighbors_with_minilm(G, capt, model=model, top_k=top_k, max_hops=hops)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 202, in get_multihop_neighbors_with_minilm
+    ranked_nodes_with_scores = rank_nodes_by_similarity(query_sentence, model, list(graph.nodes), top_k)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in rank_nodes_by_similarity
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in <listcomp>
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+KeyError: nan
+
+
+
+
+
+Processing 5:   0%|          | 0/1214 [00:00<?, ?it/s][A[A[A[A[A/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+
+                                                      [A[AProcess Process-3:
+Traceback (most recent call last):
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 260, in process_graphs
+    neighbours_with_scores = get_multihop_neighbors_with_minilm(G, capt, model=model, top_k=top_k, max_hops=hops)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 202, in get_multihop_neighbors_with_minilm
+    ranked_nodes_with_scores = rank_nodes_by_similarity(query_sentence, model, list(graph.nodes), top_k)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in rank_nodes_by_similarity
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in <listcomp>
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+KeyError: nan
+
+
+
+
+
+
+Processing 6:   0%|          | 0/1214 [00:00<?, ?it/s][A[A[A[A[A[A/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+
+
+                                                      [A[A[AProcess Process-4:
+Traceback (most recent call last):
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 260, in process_graphs
+    neighbours_with_scores = get_multihop_neighbors_with_minilm(G, capt, model=model, top_k=top_k, max_hops=hops)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 202, in get_multihop_neighbors_with_minilm
+    ranked_nodes_with_scores = rank_nodes_by_similarity(query_sentence, model, list(graph.nodes), top_k)
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in rank_nodes_by_similarity
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+  File "/home/rahul.garg/RelKMG/parse_w_caption_minilm.py", line 352, in <listcomp>
+    all_node_embeddings = torch.stack([nodesEmbCache[node] for node in all_nodes])
+KeyError: nan
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/spawn.py", line 126, in _main
+    self = reduction.pickle.load(from_parent)
+_pickle.UnpicklingError: pickle data was truncated
+/home/rahul.garg/miniconda3/envs/myenv/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 3 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

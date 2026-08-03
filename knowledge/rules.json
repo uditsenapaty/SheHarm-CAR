@@ -1,0 +1,481 @@
+{
+  "predicates": [
+    "Targets-Woman",
+    "Invokes-Sexual-Cue",
+    "Invokes-Violence-Cue",
+    "Invokes-Misogyny-Cue",
+    "Attacks-Appearance",
+    "Attacks-Character",
+    "Direct-Reference",
+    "Indirect-Implication",
+    "Sarcasm",
+    "Cultural-Reference",
+    "Image-Text-Association",
+    "Explicit-Threat",
+    "Weapon-Present",
+    "Visual-Evidence",
+    "Condemns-Harm",
+    "Quotes-Harm",
+    "Raises-Awareness",
+    "Negates-Stereotype",
+    "Empowers-Women",
+    "Non-Targeted-Content",
+    "Image-Text-Conflict",
+    "Weak-Retrieval",
+    "Rule-Conflict",
+    "No-Target-Detected",
+    "Low-Evidence"
+  ],
+  "rules": [
+    {
+      "name": "R1",
+      "text": "IF women-related target AND sexualized remark or objectification THEN Sexual-Harassment.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Sexual-Cue"
+      ],
+      "harm_class": null,
+      "category_class": 0,
+      "weight": 1.0
+    },
+    {
+      "name": "R2",
+      "text": "IF women-related target AND threat, violent intent, or encouragement of physical harm THEN Violence.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Violence-Cue"
+      ],
+      "harm_class": null,
+      "category_class": 1,
+      "weight": 1.0
+    },
+    {
+      "name": "R3",
+      "text": "IF women-related target AND gender-based inferiority, exclusion, or stereotype THEN Misogyny.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Misogyny-Cue"
+      ],
+      "harm_class": null,
+      "category_class": 2,
+      "weight": 1.0
+    },
+    {
+      "name": "R4",
+      "text": "IF women-related target AND ridicule of face, body, clothing, or physical appearance THEN Appearance-Attack.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Appearance"
+      ],
+      "harm_class": null,
+      "category_class": 3,
+      "weight": 1.0
+    },
+    {
+      "name": "R5",
+      "text": "IF women-related target AND reputation attack, moral judgement, or derogatory allegation THEN Character-Assassination.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Character"
+      ],
+      "harm_class": null,
+      "category_class": 4,
+      "weight": 1.0
+    },
+    {
+      "name": "R6",
+      "text": "IF a Sexual-Harassment cue directly refers to the identified women-related target THEN Explicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Sexual-Cue",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": 0,
+      "weight": 1.0
+    },
+    {
+      "name": "R7",
+      "text": "IF a Violence cue directly refers to the identified women-related target THEN Explicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Violence-Cue",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": 1,
+      "weight": 1.0
+    },
+    {
+      "name": "R8",
+      "text": "IF a Misogyny cue directly refers to the identified women-related target THEN Explicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Misogyny-Cue",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": 2,
+      "weight": 1.0
+    },
+    {
+      "name": "R9",
+      "text": "IF a Appearance-Attack cue directly refers to the identified women-related target THEN Explicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Appearance",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": 3,
+      "weight": 1.0
+    },
+    {
+      "name": "R10",
+      "text": "IF a Character-Assassination cue directly refers to the identified women-related target THEN Explicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Character",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": 4,
+      "weight": 1.0
+    },
+    {
+      "name": "R11",
+      "text": "IF a Sexual-Harassment interpretation requires implication or association THEN Implicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Sexual-Cue",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": 0,
+      "weight": 1.0
+    },
+    {
+      "name": "R12",
+      "text": "IF a Violence interpretation requires implication or association THEN Implicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Violence-Cue",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": 1,
+      "weight": 1.0
+    },
+    {
+      "name": "R13",
+      "text": "IF a Misogyny interpretation requires implication or association THEN Implicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Invokes-Misogyny-Cue",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": 2,
+      "weight": 1.0
+    },
+    {
+      "name": "R14",
+      "text": "IF a Appearance-Attack interpretation requires implication or association THEN Implicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Appearance",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": 3,
+      "weight": 1.0
+    },
+    {
+      "name": "R15",
+      "text": "IF a Character-Assassination interpretation requires implication or association THEN Implicit-Harm.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Attacks-Character",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": 4,
+      "weight": 1.0
+    },
+    {
+      "name": "R16",
+      "text": "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Explicit-Threat",
+        "Invokes-Violence-Cue"
+      ],
+      "harm_class": 0,
+      "category_class": 1,
+      "weight": 1.0
+    },
+    {
+      "name": "R17",
+      "text": "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Weapon-Present",
+        "Visual-Evidence"
+      ],
+      "harm_class": 0,
+      "category_class": 1,
+      "weight": 1.0
+    },
+    {
+      "name": "R18",
+      "text": "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Sarcasm",
+        "Invokes-Misogyny-Cue"
+      ],
+      "harm_class": 1,
+      "category_class": 2,
+      "weight": 1.0
+    },
+    {
+      "name": "R19",
+      "text": "IF the harmful reading requires cultural knowledge THEN increase Implicit-Harm support.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Cultural-Reference",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R20",
+      "text": "IF the harmful reading requires image-text association THEN increase Implicit-Harm support.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Image-Text-Association",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E1",
+      "text": "IF a harmful expression is quoted AND explicitly condemned THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Quotes-Harm",
+        "Condemns-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E2",
+      "text": "IF harmful language is quoted or depicted without endorsement THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Quotes-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 0.8
+    },
+    {
+      "name": "E3",
+      "text": "IF the meme raises awareness or reports harm THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Raises-Awareness"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E4",
+      "text": "IF a stereotype is explicitly rejected or corrected THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Negates-Stereotype"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E5",
+      "text": "IF the meme praises, empowers, or affirms equality for women THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Empowers-Women"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E6",
+      "text": "IF no women-related target is addressed THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Non-Targeted-Content"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E7",
+      "text": "IF misogyny is mentioned AND condemned THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Invokes-Misogyny-Cue",
+        "Condemns-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E8",
+      "text": "IF a sexual cue is mentioned AND condemned THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Invokes-Sexual-Cue",
+        "Condemns-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E9",
+      "text": "IF violence is depicted AND awareness is raised THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Invokes-Violence-Cue",
+        "Raises-Awareness"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E10",
+      "text": "IF an appearance stereotype is challenged THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Attacks-Appearance",
+        "Negates-Stereotype"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "E11",
+      "text": "IF a character attack is quoted AND criticized THEN Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Attacks-Character",
+        "Quotes-Harm",
+        "Condemns-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "G1",
+      "text": "IF image and OCR text conflict THEN reduce the neural-symbolic confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "Image-Text-Conflict"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "G2",
+      "text": "IF retrieved knowledge is weakly matched THEN reduce the confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "Weak-Retrieval"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "G3",
+      "text": "IF harm-supporting and exception rules conflict THEN reduce the confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "Rule-Conflict"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "G4",
+      "text": "IF no women-related target is detected THEN reduce the confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "No-Target-Detected"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "G5",
+      "text": "IF multimodal evidence is weak THEN reduce the confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "Low-Evidence"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    }
+  ],
+  "harmfulness_labels": [
+    "Explicit-Harm",
+    "Implicit-Harm",
+    "Non-Harm"
+  ],
+  "category_labels": [
+    "Sexual-Harassment",
+    "Violence",
+    "Misogyny",
+    "Appearance-Attack",
+    "Character-Assassination"
+  ]
+}

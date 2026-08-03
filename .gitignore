@@ -1,0 +1,54 @@
+# --- environment / tooling ---
+.lightning_studio
+.claude
+CLAUDE.md
+.env.local
+myenv
+venv
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+.cursor-server
+.vscode-server
+.windsurf-server
+.claude.json
+.zcompdump
+.zsh_history
+
+# --- raw meme images: 1.1 GB, and redistribution is governed by the source platforms'
+# terms (see the paper's Ethics Statement). dataset/images_manifest.csv carries a
+# sha256 for every file so the image set can be verified or rebuilt.
+dataset/images/
+dataset/_backup/
+
+# --- training artefacts (checkpoints, caches) ---
+runs/
+*.pt
+!knowledge/*.json
+
+# --- annotator scratch ---
+annotation_failures.jsonl
+dataset/annotation_failures.jsonl
+dataset/ocr_failures.jsonl
+
+# --- vendored upstream assets over 5 MB (code is kept; run
+#     python scripts/fetch_referred.py to restore anything listed here) ---
+referred_clones/kid_vlm/Entity Extraction/matcher_patterns.json
+referred_clones/kid_vlm/Entity Extraction/ground_res_new_target_llava_capt.jsonl
+referred_clones/kid_vlm/Entity Extraction/ground_res_with_target.jsonl
+referred_clones/kid_vlm/Entity Extraction/ground_res_new_target.jsonl
+referred_clones/kid_vlm/Entity Extraction/concept.txt
+referred_clones/hate_clipper/visualize_mappings.ipynb
+referred_clones/kid_vlm/Entity Extraction/ground_res_without_target.jsonl
+referred_clones/internvl/clip_benchmark/clip_benchmark/datasets/cupl_prompts.json
+referred_clones/internvl/internvl_chat_llava/images/demo_cli.gif
+referred_clones/llava/images/demo_cli.gif
+referred_clones/internvl/streamlit_demo/static/SimHei.ttf
+referred_clones/qwen25_vl/cookbooks/computer_use.ipynb
+referred_clones/qwen25_vl/cookbooks/2d_grounding.ipynb
+referred_clones/kid_vlm/_ACL_2025__Just_KIDDIN__Knowledge_Infusion_and_Distillation_for_Detection_of_INdecent_Memes____Citations_Fixed (1).pdf
+referred_clones/qwen25_vl/cookbooks/assets/spatial_understanding/lots_of_cars.png
+referred_clones/qwen25_vl/cookbooks/document_parsing.ipynb
+referred_clones/internvl/internvl_chat/eval/mmiu/mmiu.jsonl
+referred_clones/explainhm/data/multimodal_debate.zip

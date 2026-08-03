@@ -1,0 +1,37 @@
+[
+  {
+    "key": "kermit",
+    "role": "baseline: knowledge-guided",
+    "title": "KERMIT: Knowledge-EmpoweRed Model In harmful meme deTection",
+    "repo": "https://github.com/valeriolagatta/KERMIT_MemeDetection",
+    "paper": "MANUAL (no open PDF found)",
+    "paper_url": null,
+    "code": "0.6 MB"
+  },
+  {
+    "key": "kid_vlm",
+    "role": "baseline: knowledge-guided",
+    "title": "Just KIDDIN: Knowledge Infusion and Distillation for Detection of INdecent Memes",
+    "repo": "https://github.com/SWAN-AI/KID-VLM",
+    "paper": "cached",
+    "code": "151.1 MB"
+  },
+  {
+    "key": "sgot_r1",
+    "role": "baseline: reasoning-guided",
+    "title": "SGoT-R1: Social Graph of Thought Reasoning-Enhanced Multimodal Large Language Model for Harmful Meme Detection",
+    "repo": null,
+    "paper": "MANUAL (no open PDF found)",
+    "paper_url": null,
+    "code": "no public code found"
+  },
+  {
+    "key": "mami",
+    "role": "benchmark",
+    "title": "SemEval-2022 Task 5: Multimedia Automatic Misogyny Identification",
+    "repo": null,
+    "paper": "downloaded",
+    "paper_url": "https://aclanthology.org/2022.semeval-1.74.pdf",
+    "code": "no public code found"
+  }
+]

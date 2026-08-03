@@ -1,0 +1,62 @@
+[
+  {
+    "head": "woman",
+    "relation": "is_women_related_role",
+    "tail": "Female-Role",
+    "reasoning_role": "Identifies the women-related target."
+  },
+  {
+    "head": "female police officer",
+    "relation": "is_women_related_role",
+    "tail": "Female-Profession",
+    "reasoning_role": "Identifies the women-related target."
+  },
+  {
+    "head": "sexual comment",
+    "relation": "expresses",
+    "tail": "Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "head": "sexualized joke",
+    "relation": "expresses",
+    "tail": "Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "head": "sexual innuendo",
+    "relation": "expresses",
+    "tail": "Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "head": "lewd comment",
+    "relation": "expresses",
+    "tail": "Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "head": "explicit sexual proposition",
+    "relation": "expresses",
+    "tail": "Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "head": "Sexual-Harassment",
+    "relation": "quoted_in",
+    "tail": "quotation",
+    "reasoning_role": "Prevents quoted harmful language from being treated as endorsement."
+  },
+  {
+    "head": "Sexual-Harassment",
+    "relation": "negated_by",
+    "tail": "negation cue",
+    "reasoning_role": "Reduces harm support when the statement is explicitly rejected."
+  },
+  {
+    "head": "Sexual-Harassment",
+    "relation": "supported_by",
+    "tail": "Textual Evidence",
+    "reasoning_role": "Connects the predicted category with multimodal evidence."
+  }
+]

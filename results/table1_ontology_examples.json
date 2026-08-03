@@ -1,0 +1,62 @@
+[
+  {
+    "type": "Target",
+    "head": "woman",
+    "relation_tail": "is_women_related_role Female-Role",
+    "reasoning_role": "Identifies the women-related target."
+  },
+  {
+    "type": "Target",
+    "head": "women",
+    "relation_tail": "is_women_related_role Female-Role",
+    "reasoning_role": "Identifies the women-related target."
+  },
+  {
+    "type": "Harm cue",
+    "head": "sexual comment",
+    "relation_tail": "expresses Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "type": "Harm cue",
+    "head": "sexualized joke",
+    "relation_tail": "expresses Sexual-Harassment",
+    "reasoning_role": "Associates a harmful expression with its category."
+  },
+  {
+    "type": "Context",
+    "head": "Sexual-Harassment",
+    "relation_tail": "negated_by negation cue",
+    "reasoning_role": "Reduces harm support when the statement is explicitly rejected."
+  },
+  {
+    "type": "Context",
+    "head": "Sexual-Harassment",
+    "relation_tail": "negated_by explicit rejection",
+    "reasoning_role": "Reduces harm support when the statement is explicitly rejected."
+  },
+  {
+    "type": "Context",
+    "head": "Sexual-Harassment",
+    "relation_tail": "quoted_in quotation",
+    "reasoning_role": "Prevents quoted harmful language from being treated as endorsement."
+  },
+  {
+    "type": "Context",
+    "head": "Sexual-Harassment",
+    "relation_tail": "quoted_in quoted harmful phrase",
+    "reasoning_role": "Prevents quoted harmful language from being treated as endorsement."
+  },
+  {
+    "type": "Evidence",
+    "head": "Sexual-Harassment",
+    "relation_tail": "supported_by Textual Evidence",
+    "reasoning_role": "Connects the predicted category with multimodal evidence."
+  },
+  {
+    "type": "Evidence",
+    "head": "Sexual-Harassment",
+    "relation_tail": "supported_by Visual Evidence",
+    "reasoning_role": "Connects the predicted category with multimodal evidence."
+  }
+]
