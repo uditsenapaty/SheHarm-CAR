@@ -58,3 +58,5 @@ dataset/_removed/
 
 # imported source archive (already copied into dataset/images/, 172 MB)
 WomenHarmfulOnly1000/
+
+images_*.tar.gz

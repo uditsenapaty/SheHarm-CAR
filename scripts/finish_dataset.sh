@@ -13,10 +13,16 @@ python3 -u scripts/ocr_and_span.py --annotations dataset/annotations_v2.csv --ba
     >> dataset/_backup/ocr_3500.log 2>&1
 echo "OCR done ($(stamp)): $(rows dataset/ocr.csv) rows"
 
-echo "=== [2/6] annotation, annotator 1 ($(stamp)) ==="
+echo "=== [2/6] annotation, annotator 1, images 1-1500 ($(stamp)) ==="
 python3 -u meme_annotator.py --images-dir dataset/images --output dataset/annotations_v2.csv \
-    --batch-size 5 --retries 3 > dataset/_backup/annotate_3500.log 2>&1
+    --start 1 --end 1500 --batch-size 5 --retries 3 > dataset/_backup/annotate_1_1500.log 2>&1
 echo "annotation done ($(stamp)): $(rows dataset/annotations_v2.csv) rows"
+
+if [ -f dataset/annotations_part2.csv ]; then
+  echo "=== [2b] merging partner annotations ($(stamp)) ==="
+  python3 -u scripts/merge_annotations.py --into dataset/annotations_v2.csv \
+      --from dataset/annotations_part2.csv --apply 2>&1 | tail -8
+fi
 
 echo "=== [3/6] category adjudication, annotator 1 only ($(stamp)) ==="
 python3 -u scripts/adjudicate_categories.py --apply 2>&1 | tail -18
