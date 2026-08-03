@@ -1,1 +1,0 @@
-from .meme import MemeDataset

@@ -84,3 +84,10 @@ dataset/annotations_sheharm.csv
 # --- provenance of the imported subset ---
 dataset/mapping.csv
 dataset/mami_sublabels.csv
+
+# --- annotation tooling and vendored upstream material ---
+meme_annotator.py
+referred_papers/
+referred_clones/*
+!referred_clones/MANIFEST.md
+response.md
