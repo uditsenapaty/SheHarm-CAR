@@ -1,14 +1,14 @@
 {
   "total": 3500,
   "splits": {
-    "train": 2797,
-    "dev": 352,
-    "test": 351
+    "train": 2799,
+    "dev": 351,
+    "test": 350
   },
   "harmfulness": {
     "Non-Harm": 1675,
-    "Explicit-Harm": 1074,
-    "Implicit-Harm": 751
+    "Explicit-Harm": 936,
+    "Implicit-Harm": 889
   },
   "harm_category": {
     "None": 1675,
@@ -20,16 +20,16 @@
   },
   "split_by_harmfulness": {
     "Explicit-Harm": {
-      "train": 858,
-      "dev": 108,
-      "test": 108,
-      "Total": 1074
+      "train": 748,
+      "dev": 94,
+      "test": 94,
+      "Total": 936
     },
     "Implicit-Harm": {
-      "train": 599,
-      "dev": 76,
-      "test": 76,
-      "Total": 751
+      "train": 711,
+      "dev": 89,
+      "test": 89,
+      "Total": 889
     },
     "Non-Harm": {
       "train": 1340,
@@ -38,9 +38,9 @@
       "Total": 1675
     },
     "Total": {
-      "train": 2797,
-      "dev": 352,
-      "test": 351,
+      "train": 2799,
+      "dev": 351,
+      "test": 350,
       "Total": 3500
     }
   },
@@ -56,9 +56,9 @@
       "train": 20
     },
     "Misogyny": {
-      "dev": 60,
-      "test": 60,
-      "train": 485
+      "dev": 61,
+      "test": 61,
+      "train": 483
     },
     "None": {
       "dev": 168,
@@ -66,14 +66,14 @@
       "train": 1340
     },
     "Sexual-Harassment": {
-      "dev": 76,
-      "test": 76,
-      "train": 601
+      "dev": 75,
+      "test": 75,
+      "train": 603
     },
     "Violence": {
-      "dev": 23,
-      "test": 23,
-      "train": 175
+      "dev": 22,
+      "test": 22,
+      "train": 177
     }
   },
   "target_concepts_attested": 17,

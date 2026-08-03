@@ -82,10 +82,16 @@ def main() -> int:
         for _, row in pd.read_csv(args.prior_labels).iterrows():
             direct = any(int(row[k]) for k in ("shaming", "objectification", "violence"))
             prior[row["filename"]] = {
-                "harmfulness": "Explicit-Harm" if direct else "Implicit-Harm",
+                # Only the *presence* of harm and its category come from the pre-existing
+                # labels. Explicit vs Implicit does not exist in that schema, and deriving it
+                # from the sub-labels agrees with a model that actually looks at the meme
+                # only 34.8% of the time - barely above chance - so it is used strictly as a
+                # fallback for rows the annotator did not call harmful at all.
+                "fallback_harmfulness": "Explicit-Harm" if direct else "Implicit-Harm",
                 "harm_category": row["category"],
             }
-        print(f"{len(prior)} rows carry pre-existing harmfulness/category labels")
+        print(f"{len(prior)} rows carry pre-existing harm/category labels "
+              f"(severity taken from the annotator where available)")
 
     merged = annotations.merge(ocr, on="filename", how="left")
     before = len(merged)
@@ -98,11 +104,14 @@ def main() -> int:
 
     rows = []
     for _, row in merged.iterrows():
+        harmfulness = normalize_harmfulness(row["harm_type"])
         if row["filename"] in prior:
-            harmfulness = prior[row["filename"]]["harmfulness"]
+            # These rows are harmful by construction; keep the annotator's severity when it
+            # agrees they are harmful, otherwise fall back to the sub-label rule.
+            if harmfulness == "Non-Harm":
+                harmfulness = prior[row["filename"]]["fallback_harmfulness"]
             category = prior[row["filename"]]["harm_category"]
         else:
-            harmfulness = normalize_harmfulness(row["harm_type"])
             category = normalize_category(row["harm_category"], harmfulness)
         raw_target = str(row["women-related target"]).lower().strip()
         concept = alias_map.get(raw_target, no_target)
