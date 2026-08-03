@@ -56,7 +56,8 @@ def main() -> int:
         ("Optimizer / precision", "AdamW / mixed precision" if train["amp"] else "AdamW / fp32"),
         ("Balanced sampling", "yes" if train.get("balanced_sampling") else "no"),
         ("Weight EMA", str(train.get("ema_decay") or "off")),
-        ("Runs / hardware", f"{len(evaluation['seeds'])} seeds / single GPU"),
+        ("Runs / hardware",
+         f"{len(evaluation['seeds'])} seed{'s' if len(evaluation['seeds']) != 1 else ''} / single GPU"),
     ]
 
     write_results("table5_hyperparameters", {"config": str(args.config), "settings": dict(rows)})

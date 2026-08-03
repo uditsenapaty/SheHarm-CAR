@@ -72,4 +72,6 @@ train:
 
 eval:
   bertscore_model: roberta-large
-  seeds: [42, 43, 44]        # "results are reported as the mean over three random seeds"
+  # 1 seed by default for turnaround. The paper reports the mean over three seeds:
+  # restore with `seeds: [42, 43, 44]`, or pass --seeds 42 43 44 on the command line.
+  seeds: [42]

@@ -232,7 +232,17 @@ def load_model(model_name: str, min_pixels: int, max_pixels: int):
 
 
 def build_conversation(image_path: Path, target: str, hint: str = "") -> list[dict[str, Any]]:
-    instruction = f'Transcribe this meme and locate the span for the women-related target: "{target}". Return the JSON object only.{hint}'
+    """With no annotated target yet, transcribe only — the span can be filled in later."""
+    if target:
+        instruction = (
+            f'Transcribe this meme and locate the span for the women-related target: "{target}". '
+            f"Return the JSON object only.{hint}"
+        )
+    else:
+        instruction = (
+            "Transcribe this meme. No target has been annotated yet, so return an empty "
+            f'target_span. Return the JSON object only.{hint}'
+        )
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": [{"type": "image", "image": str(image_path.resolve())}, {"type": "text", "text": instruction}]},
@@ -292,7 +302,12 @@ def main() -> int:
         run_self_test()
         return 0
 
-    targets = {row["filename"]: row["women-related target"] for row in csv.DictReader(args.annotations.open(encoding="utf-8-sig"))}
+    # Transcription needs no annotation; only the span does. Images without a label yet are
+    # still transcribed, so OCR can run to completion ahead of annotation.
+    targets = {}
+    if args.annotations.exists():
+        targets = {row["filename"]: row["women-related target"]
+                   for row in csv.DictReader(args.annotations.open(encoding="utf-8-sig"))}
     images = []
     for path in sorted(args.images_dir.iterdir(), key=lambda p: (numeric_id(p.name) or 0, p.name)):
         image_id = numeric_id(path.name)
@@ -302,9 +317,10 @@ def main() -> int:
             images.append(path)
 
     rows = load_csv(args.output, FIELDNAMES)
-    pending = [image for image in images if (args.overwrite or image.name not in rows) and image.name in targets]
-    skipped = [image.name for image in images if image.name not in targets]
-    print(f"Selected {len(images)} images; {len(pending)} need OCR; {len(images) - len(pending) - len(skipped)} already done; {len(skipped)} unannotated (skipped).")
+    pending = [image for image in images if args.overwrite or image.name not in rows]
+    unlabelled = sum(1 for image in pending if not targets.get(image.name))
+    print(f"Selected {len(images)} images; {len(pending)} need OCR; {len(images) - len(pending)} already done; "
+          f"{unlabelled} of the pending have no annotation yet (transcription only, empty span).")
     if args.dry_run or not pending:
         return 0
 
@@ -316,7 +332,7 @@ def main() -> int:
     for batch_start in range(0, len(pending), args.batch_size):
         group = pending[batch_start : batch_start + args.batch_size]
         try:
-            outputs: list[str | None] = generate(model, processor, torch, [build_conversation(image, targets[image.name]) for image in group], args.max_new_tokens)
+            outputs: list[str | None] = generate(model, processor, torch, [build_conversation(image, targets.get(image.name, "")) for image in group], args.max_new_tokens)
         except Exception as exc:
             print(f"Batch fallback to individual requests: {exc}", file=sys.stderr)
             outputs = [None] * len(group)
@@ -334,7 +350,7 @@ def main() -> int:
                         budget = args.max_new_tokens * (3 if truncated else 1)
                         output = generate(
                             model, processor, torch,
-                            [build_conversation(image, targets[image.name], repair_hint(error))],
+                            [build_conversation(image, targets.get(image.name, ""), repair_hint(error))],
                             budget, sample=attempt > 1 and not truncated,
                         )[0]
                     rows[image.name] = validate_record(extract_json(output), image.name)
