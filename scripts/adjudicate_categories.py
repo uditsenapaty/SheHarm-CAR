@@ -121,7 +121,8 @@ def main() -> int:
             "prediction and must stay untouched, or the gold labels and kappa become circular."
         )
 
-    frame = pd.read_csv(args.annotations)
+    # keep_default_na=False: "NULL" is a real category value, not a missing one.
+    frame = pd.read_csv(args.annotations, keep_default_na=False)
     ocr_text = {}
     if args.ocr.exists():
         ocr = pd.read_csv(args.ocr, keep_default_na=False)

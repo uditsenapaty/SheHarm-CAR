@@ -272,6 +272,13 @@ def repair_hint(error: str) -> str:
             " in harm_category. If the meme targets women, harm_type must be Explicit-Harm or"
             " Implicit-Harm and harm_category must NOT be NULL."
         )
+    if "invalid harm_category" in error:
+        return (
+            " That category does not exist in this taxonomy. harm_category must be exactly one of"
+            " Misogyny, Sexual-Harassment, Violence, Appearance-Attack, Character-Assassination, or NULL."
+            " Pick the closest one: attacks on her age or looks are Appearance-Attack, attacks on her"
+            " morals or reputation are Character-Assassination, and attacks on women as a class are Misogyny."
+        )
     if "NULL must be used" in error:
         return " NULL is allowed in harm_category if and only if harm_type is Non-Harmful; otherwise pick a real category."
     if "keys must be" in error or "no JSON" in error:
