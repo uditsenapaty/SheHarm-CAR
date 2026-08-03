@@ -106,6 +106,9 @@ def main() -> int:
     parser.add_argument("--threshold", type=float, default=0.55)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--report-top", type=int, default=20)
+    parser.add_argument("--min-support", type=int, default=20,
+                        help="Concepts with fewer rows back off to their ontology target type. "
+                             "0 keeps the full 126-way inventory.")
     args = parser.parse_args()
 
     knowledge = load_knowledge(args.ontology, args.rules)
@@ -148,6 +151,24 @@ def main() -> int:
         else:                                    # ambiguous and weakly matched
             alias_map[value], scores_report[value] = NO_TARGET, score
 
+    # Back off rare concepts to their ontology parent type. The annotator writes "woman" for
+    # over half the corpus, so a 126-way label space leaves most classes with one or two
+    # examples and macro-F1 measures noise rather than skill. The ontology already defines
+    # the hierarchy (Female-Role, Female-Relationship, ...), so the fallback is principled
+    # rather than an arbitrary bucket. The ontology itself is unchanged.
+    parent = {concept["name"]: concept["target_type"] for concept in concepts}
+    if args.min_support > 0:
+        support = Counter(raw_values.map(alias_map))
+        collapsed = {name for name, count in support.items()
+                     if count < args.min_support and name != NO_TARGET}
+        alias_map = {raw: (label if label not in collapsed else parent.get(label, label))
+                     for raw, label in alias_map.items()}
+        label_space = sorted({label for label in alias_map.values() if label != NO_TARGET})
+        print(f"backoff: {len(collapsed)} concepts below {args.min_support} rows folded into "
+              f"their target type -> {len(label_space)} classes")
+    else:
+        label_space = names
+
     mapped = raw_values.map(alias_map)
     coverage = (mapped != NO_TARGET).mean() * 100
     used = mapped[mapped != NO_TARGET].value_counts()
@@ -155,6 +176,7 @@ def main() -> int:
         "rows": int(len(frame)),
         "distinct_raw_strings": len(unique),
         "inventory_size": len(names),
+        "label_space_size": len(label_space),
         "rows_with_target": int((mapped != NO_TARGET).sum()),
         "rows_without_target": int((mapped == NO_TARGET).sum()),
         "coverage_percent": round(float(coverage), 2),
@@ -166,7 +188,9 @@ def main() -> int:
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps({
-        "concepts": names,
+        "concepts": label_space,
+        "full_inventory": names,
+        "min_support": args.min_support,
         "no_target_label": NO_TARGET,
         "alias_map": alias_map,
         "match_scores": {k: round(v, 4) for k, v in scores_report.items()},

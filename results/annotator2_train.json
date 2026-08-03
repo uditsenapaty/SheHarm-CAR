@@ -1,0 +1,130 @@
+{
+  "config": "configs/default.yaml",
+  "seeds": [
+    42
+  ],
+  "split": "test",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "target_f1": 2.320075757575758,
+        "harm_f1": 52.77280994396064,
+        "category_f1": 25.259047456469787,
+        "joint": 19.37321937321937,
+        "joint_harmful": 9.264305177111716,
+        "harm_f1_Explicit-Harm": 56.573705179282875,
+        "harm_f1_Implicit-Harm": 39.655172413793096,
+        "harm_f1_Non-Harm": 62.089552238805965,
+        "category_f1_Sexual-Harassment": 31.683168316831683,
+        "category_f1_Violence": 18.750000000000004,
+        "category_f1_Misogyny": 55.172413793103445,
+        "category_f1_Appearance-Attack": 20.689655172413794,
+        "category_f1_Character-Assassination": 0.0,
+        "bertscore": 81.09359658002174,
+        "cf_faithfulness": 50.70767962499514,
+        "cf_necessity": 6.828464663095689,
+        "cf_stability": 94.58689458689459,
+        "mean_confidence_drop": 2.653924573181022,
+        "best_dev_mean_f1": 25.929917588912332
+      }
+    }
+  ],
+  "summary": {
+    "bertscore": {
+      "mean": 81.09359658002174,
+      "std": 0.0,
+      "n": 1
+    },
+    "best_dev_mean_f1": {
+      "mean": 25.929917588912332,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1": {
+      "mean": 25.259047456469787,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1_Appearance-Attack": {
+      "mean": 20.689655172413794,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1_Character-Assassination": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1_Misogyny": {
+      "mean": 55.172413793103445,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1_Sexual-Harassment": {
+      "mean": 31.683168316831683,
+      "std": 0.0,
+      "n": 1
+    },
+    "category_f1_Violence": {
+      "mean": 18.750000000000004,
+      "std": 0.0,
+      "n": 1
+    },
+    "cf_faithfulness": {
+      "mean": 50.70767962499514,
+      "std": 0.0,
+      "n": 1
+    },
+    "cf_necessity": {
+      "mean": 6.828464663095689,
+      "std": 0.0,
+      "n": 1
+    },
+    "cf_stability": {
+      "mean": 94.58689458689459,
+      "std": 0.0,
+      "n": 1
+    },
+    "harm_f1": {
+      "mean": 52.77280994396064,
+      "std": 0.0,
+      "n": 1
+    },
+    "harm_f1_Explicit-Harm": {
+      "mean": 56.573705179282875,
+      "std": 0.0,
+      "n": 1
+    },
+    "harm_f1_Implicit-Harm": {
+      "mean": 39.655172413793096,
+      "std": 0.0,
+      "n": 1
+    },
+    "harm_f1_Non-Harm": {
+      "mean": 62.089552238805965,
+      "std": 0.0,
+      "n": 1
+    },
+    "joint": {
+      "mean": 19.37321937321937,
+      "std": 0.0,
+      "n": 1
+    },
+    "joint_harmful": {
+      "mean": 9.264305177111716,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_confidence_drop": {
+      "mean": 2.653924573181022,
+      "std": 0.0,
+      "n": 1
+    },
+    "target_f1": {
+      "mean": 2.320075757575758,
+      "std": 0.0,
+      "n": 1
+    }
+  }
+}
