@@ -1,0 +1,207 @@
+{
+  "source": "dataset/annotations_v2.csv",
+  "rows": 625,
+  "reassigned": 25,
+  "before": {
+    "Sexual-Harassment": 164,
+    "nan": 392,
+    "Appearance-Attack": 23,
+    "Misogyny": 37,
+    "Violence": 9
+  },
+  "after": {
+    "Sexual-Harassment": 152,
+    "nan": 392,
+    "Appearance-Attack": 29,
+    "Misogyny": 35,
+    "Character-Assassination": 9,
+    "Violence": 8
+  },
+  "flow": {
+    "Sexual-Harassment->Character-Assassination": 7,
+    "Misogyny->Appearance-Attack": 5,
+    "Sexual-Harassment->Appearance-Attack": 3,
+    "Misogyny->Sexual-Harassment": 1,
+    "Sexual-Harassment->Misogyny": 5,
+    "Violence->Character-Assassination": 1,
+    "Appearance-Attack->Sexual-Harassment": 2,
+    "Misogyny->Character-Assassination": 1
+  },
+  "changes": [
+    {
+      "filename": "img00037.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 2,
+      "evidence": "Men rule the world Are you sure about that? I didn\u2019t see your whore thighs lifting bricks to build our civilizations or fight our wars you slut The meme uses de"
+    },
+    {
+      "filename": "img00052.png",
+      "from": "Misogyny",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "Being a single guy over 30 : SINGLE FOREVER @ericsbrainhurts STEP DAD FAT GIRLS The meme uses a derogatory term to describe women, promoting negative stereotype"
+    },
+    {
+      "filename": "img00120.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "\"Your car seems fine miss Cortez .. Just crap in the air filter\" \"How many Times a day do I have to do that?\" The meme uses a patronizing tone towards the woman"
+    },
+    {
+      "filename": "img00130.jpg",
+      "from": "Misogyny",
+      "to": "Sexual-Harassment",
+      "hits": 1,
+      "evidence": "if all men are the same why do women take so long to choose one? Bikini? No problem. Underwear? OMG! Don't look! DON'T TRY TO UNDERSTAND WOMEN COLORS? When did "
+    },
+    {
+      "filename": "img00155.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 2,
+      "evidence": "INCELS, TALKING ABOUT PEOPLE SHE'S SLEPT WITH ME, THINKING THEY MEAN ACTUAL DEAD BODIES WANTING A GIRL WITH A MAX BODY COUNT OF ZERO The meme uses a derogatory "
+    },
+    {
+      "filename": "img00156.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "r/terriblefacebookmemes Asian women to the rescue Being a single guy over 30: SINGLE FOREVER STEP DAD FAT GIRLS ASIAN WOMEN The meme portrays Asian women as sav"
+    },
+    {
+      "filename": "img00161.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Misogyny",
+      "hits": 1,
+      "evidence": ">Has no male best friend >talks to males only till its work related >doesn\u2019t accept flirting >extremely beautiful >wears decent clothes >high morals >conservati"
+    },
+    {
+      "filename": "img00213.png",
+      "from": "Misogyny",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "Sapphics who don't like fat girls are so weird to me. You're supposed to like girl. Why wouldn't you want more girl per girl The post criticizes people who don'"
+    },
+    {
+      "filename": "img00240.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "After seeing this.. it hits me hard Women don\u2019t regret cheating, they regret not hiding it better mr The meme perpetuates a harmful stereotype about women's mot"
+    },
+    {
+      "filename": "img00245.png",
+      "from": "Sexual-Harassment",
+      "to": "Misogyny",
+      "hits": 2,
+      "evidence": "When girls say they like bad boys who are mean to them so I join the Nazis and say women belong in the kitchen but they still won\u2019t talk to me: mematic & Tenor "
+    },
+    {
+      "filename": "img00344.png",
+      "from": "Sexual-Harassment",
+      "to": "Misogyny",
+      "hits": 1,
+      "evidence": "WHY DOES CHICA GO THROUGH THE KITCHEN? LET'S SAY SOME WOMEN KNOWS WHERE THEY BELONGS The meme suggests a restrictive view of women's roles, implying they should"
+    },
+    {
+      "filename": "img00350.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "How modern women expect men to choose their women 33+ 3 BABY DADDIES MULTIPLE BODIES (100+) 25-40 PRIME MEN 18-25 O BODY COUNT NO KIDS The meme uses offensive l"
+    },
+    {
+      "filename": "img00352.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "who will you choose? Avg. 5'2 ft Knows cooking, cleaning, etc Proper housewife material Follows husband's orders Respects her religion, not a secular or librand"
+    },
+    {
+      "filename": "img00355.png",
+      "from": "Misogyny",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "Remember a car is useless without fuel! the first place, while now they are ways without men, it wasent like that before. What?NO, MAN ARNT USFL FOR REPRUDUCTIO"
+    },
+    {
+      "filename": "img00440.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "CRAZY EX-GIRLFRIENDS ARE LIKE A BOX OF CHOCOLATES THEY WILL KILL YOUR DOG memecrunch.com The meme uses a derogatory stereotype about women to make a humorous bu"
+    },
+    {
+      "filename": "img00466.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "Date a girl who wears glasses. It's like dating two girls when she takes them off. \ud83d\ude0e Just tell her to remove the make up. And then you will date 3 The meme sugg"
+    },
+    {
+      "filename": "img00470.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Character-Assassination",
+      "hits": 3,
+      "evidence": "IF SHE CHEATED ON HER LAST BOYFRIEND TO BE WITH YOU CHEAT ON HER WITH YOUR NEXT GIRLFRIEND The meme suggests a manipulative approach to relationships, which can"
+    },
+    {
+      "filename": "img00490.png",
+      "from": "Violence",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "Roses are red Lasers are a beam Woman clubs boyfriend to death because he cheated on her in a dream A 28-year-old man is dead after his girlfriend beat him to d"
+    },
+    {
+      "filename": "img00519.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Misogyny",
+      "hits": 2,
+      "evidence": "THIS IS WHAT A FEMINIST LOOKS LIKE The meme uses a provocative and offensive statement about a woman's appearance to make a point about feminism. woman wearing "
+    },
+    {
+      "filename": "img00538.jpg",
+      "from": "Misogyny",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "What an ugly bitch! Ethan Klein @h3h3productions She came back!!!! I wasn't sure.... Damn she's one ugly bitch The comment 'Damn she\u2019s one ugly bitch' directly "
+    },
+    {
+      "filename": "img00565.jpg",
+      "from": "Appearance-Attack",
+      "to": "Sexual-Harassment",
+      "hits": 1,
+      "evidence": "The perfect woman (According to the Internet) Emma Watson's face mute button big boobs gamer pokemon lover sandwich maker beer dispenser bacon dress The image u"
+    },
+    {
+      "filename": "img00579.jpg",
+      "from": "Misogyny",
+      "to": "Appearance-Attack",
+      "hits": 1,
+      "evidence": "Bro, your girlfriend looks ugly So? I mean how can you love someone who is ugly? Look at these. One is good looking $1 note and other is ugly looking. Will the "
+    },
+    {
+      "filename": "img00580.jpg",
+      "from": "Sexual-Harassment",
+      "to": "Misogyny",
+      "hits": 1,
+      "evidence": "What Guys see... Clutch Brake Gas What Girls see... What The Fuck The meme uses a derogatory term 'What the fuck' to mock female drivers, implying they are conf"
+    },
+    {
+      "filename": "img00615.png",
+      "from": "Misogyny",
+      "to": "Character-Assassination",
+      "hits": 1,
+      "evidence": "GFs are just domesticated thots The meme uses derogatory language to describe girlfriends as 'domesticated thots', which is a form of dehumanization and derogat"
+    },
+    {
+      "filename": "img00623.jpg",
+      "from": "Appearance-Attack",
+      "to": "Sexual-Harassment",
+      "hits": 1,
+      "evidence": "The look she gives you if you ask why she's wearing that as a 300 pound woman The meme uses a woman's body as a target for objectification and focuses on her we"
+    }
+  ]
+}

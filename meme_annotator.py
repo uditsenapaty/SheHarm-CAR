@@ -54,12 +54,60 @@ DATASET RULES
 2. harm_type MUST be exactly one of: Explicit-Harm, Implicit-Harm, Non-Harmful.
 3. harm_category MUST be exactly one of: Misogyny, Sexual-Harassment, Violence, Appearance-Attack, Character-Assassination, NULL.
 4. Use NULL if and only if harm_type is Non-Harmful. A harmful record must use a non-NULL category.
-5. Explicit-Harm is direct abuse, violence, or sexual assault. Implicit-Harm is stereotyping, degradation, or mocking women. Non-Harmful does not target women for abuse/harassment; neutral examples must still be same-entity hard negatives, not generic gendered humour.
-6. rationale MUST be one concise line grounded in the actual visual/textual evidence. Do not invent details. Do not leave any field empty.
+5. rationale MUST be one concise line grounded in the actual visual/textual evidence. Do not invent details. Do not leave any field empty.
 
-CALIBRATION EXAMPLE
-Image: a cartoon says "New seatbelt design: 45% less car accidents!!" and obscures the woman passenger's view with the belt.
-Output: {"women-related target":"woman passenger","harm_type":"Implicit-Harm","harm_category":"Misogyny","rationale":"The meme promotes a misogynistic stereotype by implying women passengers are responsible for car accidents."}
+HOW TO DECIDE harm_type
+  Explicit-Harm   the harm is stated outright: direct insult, threat, slur, sexual aggression,
+                  or a call for violence. A reader needs no inference.
+  Implicit-Harm   the harm requires inference: stereotype, sarcasm, cultural reference, or an
+                  image-text association. The words alone could look innocent.
+  Non-Harmful     the meme does not target a woman for abuse. This includes quotation,
+                  condemnation, counter-speech, awareness, praise, and content aimed at men,
+                  animals or objects.
+
+HOW TO DECIDE harm_category - ask WHAT THE MEME ATTACKS, then pick the MOST SPECIFIC match.
+  Sexual-Harassment       attacks her sexually: sexual comment, objectification, reducing her
+                          to body parts, sexual proposition, rape or assault reference.
+                          Choose this ONLY when the harm is sexual in nature.
+  Violence                attacks her body: hitting, beating, killing, acid, weapons, threats
+                          of physical harm, or domestic violence played as a joke.
+  Misogyny                attacks women as a class: inferiority, exclusion, gender-role
+                          stereotypes ("belongs in the kitchen", "can't drive", "too emotional").
+  Appearance-Attack       attacks how she looks: ugly, fat, skinny, old, her face, body, hair,
+                          weight, clothing, makeup, or cosmetic surgery.
+  Character-Assassination attacks who she is said to be: her morals, honesty, loyalty or
+                          reputation. Slut-shaming, "characterless", promiscuity or body-count
+                          shaming, cheating and gold-digger accusations, calling her fake,
+                          manipulative, a liar, a bad mother, or an attention seeker.
+
+CRITICAL - AVOID THE DEFAULT ANSWER
+These five categories are NOT equally likely to be right for a given meme, and no category is
+the safe fallback. In particular:
+  - Do NOT label a meme Sexual-Harassment merely because a woman's body is visible or the meme
+    is crude. The ATTACK itself must be sexual.
+  - Slut-shaming and promiscuity insults are Character-Assassination, not Sexual-Harassment:
+    they attack her reputation, not her body sexually.
+  - Insulting her looks is Appearance-Attack, not Misogyny, unless the claim is about women
+    generally.
+  - Do NOT label a meme Non-Harmful merely because it is a joke. Ask whether the joke's target
+    is a woman and whether it demeans her.
+Decide by identifying the act of harm first, then naming the category that describes that act.
+
+CALIBRATION EXAMPLES
+Image: a seatbelt cartoon captioned "New seatbelt design: 45% less car accidents!!" blocking a woman passenger's view.
+Output: {"women-related target":"woman passenger","harm_type":"Implicit-Harm","harm_category":"Misogyny","rationale":"The meme implies women cause car accidents, a gender-role stereotype about competence."}
+
+Image: a photo of a woman captioned "her body count is higher than her IQ".
+Output: {"women-related target":"woman","harm_type":"Explicit-Harm","harm_category":"Character-Assassination","rationale":"The caption shames the woman's sexual history to attack her morality and intelligence."}
+
+Image: a before/after photo captioned "this is why you take her swimming on the first date".
+Output: {"women-related target":"her makeup","harm_type":"Explicit-Harm","harm_category":"Appearance-Attack","rationale":"The meme mocks the woman's appearance without makeup, treating her natural face as deception."}
+
+Image: a cartoon of a man raising his fist captioned "when she talks back".
+Output: {"women-related target":"wife","harm_type":"Explicit-Harm","harm_category":"Violence","rationale":"The meme presents hitting a woman for speaking as a punchline, endorsing domestic violence."}
+
+Image: a screenshot of a sexist tweet with the caption "imagine posting this and thinking you cooked".
+Output: {"women-related target":"women","harm_type":"Non-Harmful","harm_category":"NULL","rationale":"The meme quotes a sexist remark in order to ridicule its author, which is counter-speech."}
 """
 
 
