@@ -60,3 +60,7 @@ dataset/_removed/
 WomenHarmfulOnly1000/
 
 images_*.tar.gz
+
+# 856 MB archive of the meme images (see the images entry above)
+images.zip
+*.zip

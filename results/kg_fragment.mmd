@@ -1,0 +1,35 @@
+graph LR
+    n0["woman passenger"]
+    n1["Female-Role"]
+    n0 -- is_women_related_role --> n1
+    n2["her face"]
+    n3["Female-Appearance"]
+    n2 -- is_women_related_role --> n3
+    n4["belongs in the kitchen"]
+    n5["Misogyny"]
+    n4 -- expresses --> n5
+    n6["too ugly"]
+    n7["Appearance-Attack"]
+    n6 -- expresses --> n7
+    n8["beat her"]
+    n9["Violence"]
+    n8 -- expresses --> n9
+    n10["quotation"]
+    n5 -- quoted_in --> n10
+    n11["negation cue"]
+    n5 -- negated_by --> n11
+    n12["Visual Evidence"]
+    n9 -- supported_by --> n12
+    style n0 fill:#8ecae6,stroke:#22333b
+    style n1 fill:#219ebc,stroke:#22333b
+    style n2 fill:#8ecae6,stroke:#22333b
+    style n3 fill:#219ebc,stroke:#22333b
+    style n4 fill:#ffb703,stroke:#22333b
+    style n5 fill:#fb8500,stroke:#22333b
+    style n6 fill:#ffb703,stroke:#22333b
+    style n7 fill:#fb8500,stroke:#22333b
+    style n8 fill:#ffb703,stroke:#22333b
+    style n9 fill:#fb8500,stroke:#22333b
+    style n10 fill:#a7c957,stroke:#22333b
+    style n11 fill:#a7c957,stroke:#22333b
+    style n12 fill:#bdb2ff,stroke:#22333b
