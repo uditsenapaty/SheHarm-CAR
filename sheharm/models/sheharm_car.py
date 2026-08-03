@@ -2,9 +2,9 @@
 
 Pipeline (diagram SheHarm-CAR_UPTODATE.png):
     1 multimodal encoding + bidirectional cross-modal attention -> z
-    2 women-related target identification                        -> p^t, t~
+    2 ontology-linked target prediction (classifier)             -> p^t, a~
     3 women-harm knowledge ontology                              (static)
-    4 target-conditioned retrieval                               -> k~
+    4 target-conditioned retrieval, conditioned on a~            -> k~
     5 contrastive symbolic rule reasoning                        -> q^D
     6 confidence-gated neural-symbolic fusion                    -> u
     7 predictions: target, harmfulness, harm category, rationale

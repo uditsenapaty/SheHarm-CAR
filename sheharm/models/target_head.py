@@ -1,7 +1,15 @@
-"""Women-related target identification (diagram block 2).
+"""Women-related target identification: the Ontology-Linked Target Predictor.
 
-The paper formulates this as classification over a controlled inventory of ontology-linked
-target concepts, not as span tagging:
+Multimodal representation z -> target distribution p^t -> soft target representation a~,
+which is what every downstream module consumes. It is a *classifier*, not a decoder and not
+a span extractor: nothing is generated and nothing is tagged. It ranks a controlled
+inventory of canonical, ontology-linked women-related target concepts, exactly the entities
+Table 1 relates through is-a and that every rule in Table 2 opens with.
+
+Crucially, retrieval refines the *representation*, never the predicted label: the paper's
+flow is p^t -> a~ -> retrieval -> reasoning, and there is no second target prediction after
+retrieval. Joint-F1 improves because harmfulness and category improve, not because the
+target is revised.
 
     p^t = softmax(W_t z + b_t)                      (Eq. target-distribution)
     L_tgt = -sum_i log p^t_{i,t_i}                   (Eq. target-loss)

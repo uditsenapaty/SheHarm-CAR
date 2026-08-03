@@ -222,32 +222,37 @@ def build_rules() -> list[dict]:
     for index, category in enumerate(CATEGORY_CONCEPTS, start=1):
         add(f"R{index}", f"IF women-related target AND {descriptions[category]} THEN {category}.",
             "positive", ["Targets-Woman", CUE_PREDICATE[category]], category=category)
-    for index, category in enumerate(CATEGORY_CONCEPTS, start=6):
+    # R6-R10 are the paper's Table 2 identifiers: generic explicit, generic implicit, the two
+    # contextual exceptions, and confidence control. Category-specific variants follow at R11+.
+    add("R6", "IF a harmful cue directly refers to the identified women-related target THEN increase Explicit-Harm support.",
+        "positive", ["Targets-Woman", "Direct-Reference"], harm="Explicit-Harm")
+    add("R7", "IF the harmful interpretation requires image-text association, cultural knowledge, sarcasm, or indirect implication THEN increase Implicit-Harm support.",
+        "positive", ["Targets-Woman", "Indirect-Implication"], harm="Implicit-Harm")
+    add("R8", "IF a harmful expression is quoted or depicted AND explicitly criticized, condemned, or challenged THEN support Non-Harm.",
+        "exception", ["Quotes-Harm", "Condemns-Harm"], harm="Non-Harm")
+    add("R9", "IF the meme raises awareness, provides counter-speech, or reports harm without endorsement THEN support Non-Harm.",
+        "exception", ["Raises-Awareness"], harm="Non-Harm")
+    add("R10", "IF image, OCR text, retrieved knowledge, and activated rules conflict THEN reduce the neural-symbolic confidence gate.",
+        "gate", ["Image-Text-Conflict"])
+
+    for index, category in enumerate(CATEGORY_CONCEPTS, start=11):
         add(f"R{index}", f"IF a {category} cue directly refers to the identified women-related target THEN Explicit-Harm.",
             "positive", ["Targets-Woman", CUE_PREDICATE[category], "Direct-Reference"],
             harm="Explicit-Harm", category=category)
-    for index, category in enumerate(CATEGORY_CONCEPTS, start=11):
+    for index, category in enumerate(CATEGORY_CONCEPTS, start=16):
         add(f"R{index}", f"IF a {category} interpretation requires implication or association THEN Implicit-Harm.",
             "positive", ["Targets-Woman", CUE_PREDICATE[category], "Indirect-Implication"],
             harm="Implicit-Harm", category=category)
-    add("R16", "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence.",
+    add("R21", "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence.",
         "positive", ["Targets-Woman", "Explicit-Threat", "Invokes-Violence-Cue"], harm="Explicit-Harm", category="Violence")
-    add("R17", "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence.",
+    add("R22", "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence.",
         "positive", ["Targets-Woman", "Weapon-Present", "Visual-Evidence"], harm="Explicit-Harm", category="Violence")
-    add("R18", "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny.",
+    add("R23", "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny.",
         "positive", ["Targets-Woman", "Sarcasm", "Invokes-Misogyny-Cue"], harm="Implicit-Harm", category="Misogyny")
-    add("R19", "IF the harmful reading requires cultural knowledge THEN increase Implicit-Harm support.",
-        "positive", ["Targets-Woman", "Cultural-Reference", "Indirect-Implication"], harm="Implicit-Harm")
-    add("R20", "IF the harmful reading requires image-text association THEN increase Implicit-Harm support.",
-        "positive", ["Targets-Woman", "Image-Text-Association", "Indirect-Implication"], harm="Implicit-Harm")
 
-    add("E1", "IF a harmful expression is quoted AND explicitly condemned THEN Non-Harm.",
-        "exception", ["Quotes-Harm", "Condemns-Harm"], harm="Non-Harm")
-    add("E2", "IF harmful language is quoted or depicted without endorsement THEN Non-Harm.",
+    add("E1", "IF harmful language is quoted or depicted without endorsement THEN Non-Harm.",
         "exception", ["Quotes-Harm"], harm="Non-Harm", weight=0.8)
-    add("E3", "IF the meme raises awareness or reports harm THEN Non-Harm.",
-        "exception", ["Raises-Awareness"], harm="Non-Harm")
-    add("E4", "IF a stereotype is explicitly rejected or corrected THEN Non-Harm.",
+    add("E3", "IF a stereotype is explicitly rejected or corrected THEN Non-Harm.",
         "exception", ["Negates-Stereotype"], harm="Non-Harm")
     add("E5", "IF the meme praises, empowers, or affirms equality for women THEN Non-Harm.",
         "exception", ["Empowers-Women"], harm="Non-Harm")
@@ -264,7 +269,6 @@ def build_rules() -> list[dict]:
     add("E11", "IF a character attack is quoted AND criticized THEN Non-Harm.",
         "exception", ["Attacks-Character", "Quotes-Harm", "Condemns-Harm"], harm="Non-Harm")
 
-    add("G1", "IF image and OCR text conflict THEN reduce the neural-symbolic confidence gate.", "gate", ["Image-Text-Conflict"])
     add("G2", "IF retrieved knowledge is weakly matched THEN reduce the confidence gate.", "gate", ["Weak-Retrieval"])
     add("G3", "IF harm-supporting and exception rules conflict THEN reduce the confidence gate.", "gate", ["Rule-Conflict"])
     add("G4", "IF no women-related target is detected THEN reduce the confidence gate.", "gate", ["No-Target-Detected"])

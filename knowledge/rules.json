@@ -89,6 +89,64 @@
     },
     {
       "name": "R6",
+      "text": "IF a harmful cue directly refers to the identified women-related target THEN increase Explicit-Harm support.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Direct-Reference"
+      ],
+      "harm_class": 0,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R7",
+      "text": "IF the harmful interpretation requires image-text association, cultural knowledge, sarcasm, or indirect implication THEN increase Implicit-Harm support.",
+      "polarity": "positive",
+      "predicates": [
+        "Targets-Woman",
+        "Indirect-Implication"
+      ],
+      "harm_class": 1,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R8",
+      "text": "IF a harmful expression is quoted or depicted AND explicitly criticized, condemned, or challenged THEN support Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Quotes-Harm",
+        "Condemns-Harm"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R9",
+      "text": "IF the meme raises awareness, provides counter-speech, or reports harm without endorsement THEN support Non-Harm.",
+      "polarity": "exception",
+      "predicates": [
+        "Raises-Awareness"
+      ],
+      "harm_class": 2,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R10",
+      "text": "IF image, OCR text, retrieved knowledge, and activated rules conflict THEN reduce the neural-symbolic confidence gate.",
+      "polarity": "gate",
+      "predicates": [
+        "Image-Text-Conflict"
+      ],
+      "harm_class": null,
+      "category_class": null,
+      "weight": 1.0
+    },
+    {
+      "name": "R11",
       "text": "IF a Sexual-Harassment cue directly refers to the identified women-related target THEN Explicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -101,7 +159,7 @@
       "weight": 1.0
     },
     {
-      "name": "R7",
+      "name": "R12",
       "text": "IF a Violence cue directly refers to the identified women-related target THEN Explicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -114,7 +172,7 @@
       "weight": 1.0
     },
     {
-      "name": "R8",
+      "name": "R13",
       "text": "IF a Misogyny cue directly refers to the identified women-related target THEN Explicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -127,7 +185,7 @@
       "weight": 1.0
     },
     {
-      "name": "R9",
+      "name": "R14",
       "text": "IF a Appearance-Attack cue directly refers to the identified women-related target THEN Explicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -140,7 +198,7 @@
       "weight": 1.0
     },
     {
-      "name": "R10",
+      "name": "R15",
       "text": "IF a Character-Assassination cue directly refers to the identified women-related target THEN Explicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -153,7 +211,7 @@
       "weight": 1.0
     },
     {
-      "name": "R11",
+      "name": "R16",
       "text": "IF a Sexual-Harassment interpretation requires implication or association THEN Implicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -166,7 +224,7 @@
       "weight": 1.0
     },
     {
-      "name": "R12",
+      "name": "R17",
       "text": "IF a Violence interpretation requires implication or association THEN Implicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -179,7 +237,7 @@
       "weight": 1.0
     },
     {
-      "name": "R13",
+      "name": "R18",
       "text": "IF a Misogyny interpretation requires implication or association THEN Implicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -192,7 +250,7 @@
       "weight": 1.0
     },
     {
-      "name": "R14",
+      "name": "R19",
       "text": "IF a Appearance-Attack interpretation requires implication or association THEN Implicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -205,7 +263,7 @@
       "weight": 1.0
     },
     {
-      "name": "R15",
+      "name": "R20",
       "text": "IF a Character-Assassination interpretation requires implication or association THEN Implicit-Harm.",
       "polarity": "positive",
       "predicates": [
@@ -218,7 +276,7 @@
       "weight": 1.0
     },
     {
-      "name": "R16",
+      "name": "R21",
       "text": "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence.",
       "polarity": "positive",
       "predicates": [
@@ -231,7 +289,7 @@
       "weight": 1.0
     },
     {
-      "name": "R17",
+      "name": "R22",
       "text": "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence.",
       "polarity": "positive",
       "predicates": [
@@ -244,7 +302,7 @@
       "weight": 1.0
     },
     {
-      "name": "R18",
+      "name": "R23",
       "text": "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny.",
       "polarity": "positive",
       "predicates": [
@@ -257,45 +315,7 @@
       "weight": 1.0
     },
     {
-      "name": "R19",
-      "text": "IF the harmful reading requires cultural knowledge THEN increase Implicit-Harm support.",
-      "polarity": "positive",
-      "predicates": [
-        "Targets-Woman",
-        "Cultural-Reference",
-        "Indirect-Implication"
-      ],
-      "harm_class": 1,
-      "category_class": null,
-      "weight": 1.0
-    },
-    {
-      "name": "R20",
-      "text": "IF the harmful reading requires image-text association THEN increase Implicit-Harm support.",
-      "polarity": "positive",
-      "predicates": [
-        "Targets-Woman",
-        "Image-Text-Association",
-        "Indirect-Implication"
-      ],
-      "harm_class": 1,
-      "category_class": null,
-      "weight": 1.0
-    },
-    {
       "name": "E1",
-      "text": "IF a harmful expression is quoted AND explicitly condemned THEN Non-Harm.",
-      "polarity": "exception",
-      "predicates": [
-        "Quotes-Harm",
-        "Condemns-Harm"
-      ],
-      "harm_class": 2,
-      "category_class": null,
-      "weight": 1.0
-    },
-    {
-      "name": "E2",
       "text": "IF harmful language is quoted or depicted without endorsement THEN Non-Harm.",
       "polarity": "exception",
       "predicates": [
@@ -307,17 +327,6 @@
     },
     {
       "name": "E3",
-      "text": "IF the meme raises awareness or reports harm THEN Non-Harm.",
-      "polarity": "exception",
-      "predicates": [
-        "Raises-Awareness"
-      ],
-      "harm_class": 2,
-      "category_class": null,
-      "weight": 1.0
-    },
-    {
-      "name": "E4",
       "text": "IF a stereotype is explicitly rejected or corrected THEN Non-Harm.",
       "polarity": "exception",
       "predicates": [
@@ -407,17 +416,6 @@
         "Condemns-Harm"
       ],
       "harm_class": 2,
-      "category_class": null,
-      "weight": 1.0
-    },
-    {
-      "name": "G1",
-      "text": "IF image and OCR text conflict THEN reduce the neural-symbolic confidence gate.",
-      "polarity": "gate",
-      "predicates": [
-        "Image-Text-Conflict"
-      ],
-      "harm_class": null,
       "category_class": null,
       "weight": 1.0
     },

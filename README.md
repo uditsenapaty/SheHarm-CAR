@@ -26,8 +26,11 @@ Numbers match the blocks in the diagram above.
 
 1. **Multimodal encoding** — CLIP ViT-B/32 and RoBERTa-base, bidirectional cross-modal
    attention, pooled into `z`.
-2. **Target identification** — `p^t = softmax(W_t z + b_t)` over the controlled inventory;
-   the soft target `t̃ = Σ p^t_m e^t_m` conditions everything downstream.
+2. **Ontology-Linked Target Predictor** — `p^t = softmax(W_t z + b_t)` over the controlled
+   inventory of canonical ontology-linked target concepts. A classifier, not a decoder and
+   not span extraction. The soft target `ã = Σ p^t_m e^t_m` conditions retrieval, rules, the
+   gate and the rationale decoder. Retrieval refines the *representation*, never re-predicts
+   the label — there is no second target prediction after retrieval.
 3. **Women-Harm Knowledge Ontology** — 611 concepts, 14 relation types, 1,287 triples.
 4. **Target-conditioned retrieval** — top-K=5 concepts by cosine similarity, τ=0.07.
 5. **Contrastive symbolic reasoning** — 36 soft rules; `ρ_j = Π_l p_jl`,

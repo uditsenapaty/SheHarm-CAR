@@ -27,95 +27,100 @@
   {
     "rule": "R6",
     "polarity": "positive",
-    "description": "IF a Sexual-Harassment cue directly refers to the identified women-related target THEN Explicit-Harm."
+    "description": "IF a harmful cue directly refers to the identified women-related target THEN increase Explicit-Harm support."
   },
   {
     "rule": "R7",
     "polarity": "positive",
-    "description": "IF a Violence cue directly refers to the identified women-related target THEN Explicit-Harm."
+    "description": "IF the harmful interpretation requires image-text association, cultural knowledge, sarcasm, or indirect implication THEN increase Implicit-Harm support."
   },
   {
     "rule": "R8",
-    "polarity": "positive",
-    "description": "IF a Misogyny cue directly refers to the identified women-related target THEN Explicit-Harm."
+    "polarity": "exception",
+    "description": "IF a harmful expression is quoted or depicted AND explicitly criticized, condemned, or challenged THEN support Non-Harm."
   },
   {
     "rule": "R9",
-    "polarity": "positive",
-    "description": "IF a Appearance-Attack cue directly refers to the identified women-related target THEN Explicit-Harm."
+    "polarity": "exception",
+    "description": "IF the meme raises awareness, provides counter-speech, or reports harm without endorsement THEN support Non-Harm."
   },
   {
     "rule": "R10",
-    "polarity": "positive",
-    "description": "IF a Character-Assassination cue directly refers to the identified women-related target THEN Explicit-Harm."
+    "polarity": "gate",
+    "description": "IF image, OCR text, retrieved knowledge, and activated rules conflict THEN reduce the neural-symbolic confidence gate."
   },
   {
     "rule": "R11",
     "polarity": "positive",
-    "description": "IF a Sexual-Harassment interpretation requires implication or association THEN Implicit-Harm."
+    "description": "IF a Sexual-Harassment cue directly refers to the identified women-related target THEN Explicit-Harm."
   },
   {
     "rule": "R12",
     "polarity": "positive",
-    "description": "IF a Violence interpretation requires implication or association THEN Implicit-Harm."
+    "description": "IF a Violence cue directly refers to the identified women-related target THEN Explicit-Harm."
   },
   {
     "rule": "R13",
     "polarity": "positive",
-    "description": "IF a Misogyny interpretation requires implication or association THEN Implicit-Harm."
+    "description": "IF a Misogyny cue directly refers to the identified women-related target THEN Explicit-Harm."
   },
   {
     "rule": "R14",
     "polarity": "positive",
-    "description": "IF a Appearance-Attack interpretation requires implication or association THEN Implicit-Harm."
+    "description": "IF a Appearance-Attack cue directly refers to the identified women-related target THEN Explicit-Harm."
   },
   {
     "rule": "R15",
     "polarity": "positive",
-    "description": "IF a Character-Assassination interpretation requires implication or association THEN Implicit-Harm."
+    "description": "IF a Character-Assassination cue directly refers to the identified women-related target THEN Explicit-Harm."
   },
   {
     "rule": "R16",
     "polarity": "positive",
-    "description": "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence."
+    "description": "IF a Sexual-Harassment interpretation requires implication or association THEN Implicit-Harm."
   },
   {
     "rule": "R17",
     "polarity": "positive",
-    "description": "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence."
+    "description": "IF a Violence interpretation requires implication or association THEN Implicit-Harm."
   },
   {
     "rule": "R18",
     "polarity": "positive",
-    "description": "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny."
+    "description": "IF a Misogyny interpretation requires implication or association THEN Implicit-Harm."
   },
   {
     "rule": "R19",
     "polarity": "positive",
-    "description": "IF the harmful reading requires cultural knowledge THEN increase Implicit-Harm support."
+    "description": "IF a Appearance-Attack interpretation requires implication or association THEN Implicit-Harm."
   },
   {
     "rule": "R20",
     "polarity": "positive",
-    "description": "IF the harmful reading requires image-text association THEN increase Implicit-Harm support."
+    "description": "IF a Character-Assassination interpretation requires implication or association THEN Implicit-Harm."
+  },
+  {
+    "rule": "R21",
+    "polarity": "positive",
+    "description": "IF women-related target AND explicit threat AND violent cue THEN Explicit-Harm / Violence."
+  },
+  {
+    "rule": "R22",
+    "polarity": "positive",
+    "description": "IF women-related target AND weapon present AND visual evidence THEN Explicit-Harm / Violence."
+  },
+  {
+    "rule": "R23",
+    "polarity": "positive",
+    "description": "IF women-related target AND sarcasm AND misogynistic cue THEN Implicit-Harm / Misogyny."
   },
   {
     "rule": "E1",
-    "polarity": "exception",
-    "description": "IF a harmful expression is quoted AND explicitly condemned THEN Non-Harm."
-  },
-  {
-    "rule": "E2",
     "polarity": "exception",
     "description": "IF harmful language is quoted or depicted without endorsement THEN Non-Harm."
   },
   {
     "rule": "E3",
-    "polarity": "exception",
-    "description": "IF the meme raises awareness or reports harm THEN Non-Harm."
-  },
-  {
-    "rule": "E4",
     "polarity": "exception",
     "description": "IF a stereotype is explicitly rejected or corrected THEN Non-Harm."
   },
@@ -153,11 +158,6 @@
     "rule": "E11",
     "polarity": "exception",
     "description": "IF a character attack is quoted AND criticized THEN Non-Harm."
-  },
-  {
-    "rule": "G1",
-    "polarity": "gate",
-    "description": "IF image and OCR text conflict THEN reduce the neural-symbolic confidence gate."
   },
   {
     "rule": "G2",
