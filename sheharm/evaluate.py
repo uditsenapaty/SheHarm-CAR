@@ -45,6 +45,9 @@ def predict(model, loader, tokenizer, device, compute_rationales: bool = True,
             pixel_values=batch["pixel_values"],
             input_ids=batch["input_ids"],
             attention_mask=batch["attention_mask"],
+            # ViLT and the CLIP-based baselines retokenize this with their own vocabulary;
+            # without it they receive RoBERTa's 128-token ids and exceed their position limit.
+            ocr_text=batch.get("ocr_text"),
             compute_counterfactuals=False,
         )
         harm_probabilities = F.softmax(output.harm_logits, dim=-1)
@@ -122,7 +125,8 @@ def intervention_analysis(model, loader, device, interventions: list[str]) -> di
         }
         output = model(
             pixel_values=batch["pixel_values"], input_ids=batch["input_ids"],
-            attention_mask=batch["attention_mask"], compute_counterfactuals=False,
+            attention_mask=batch["attention_mask"], ocr_text=batch.get("ocr_text"),
+            compute_counterfactuals=False,
         )
         for name in interventions:
             result = model.intervene(output, batch["attention_mask"], name)

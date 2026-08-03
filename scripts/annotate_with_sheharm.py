@@ -78,7 +78,8 @@ def main() -> int:
                 tensors = {k: (v.to(device) if isinstance(v, torch.Tensor) else v) for k, v in batch.items()}
                 output = model(
                     pixel_values=tensors["pixel_values"], input_ids=tensors["input_ids"],
-                    attention_mask=tensors["attention_mask"], compute_counterfactuals=False,
+                    attention_mask=tensors["attention_mask"], ocr_text=tensors.get("ocr_text"),
+                    compute_counterfactuals=False,
                 )
                 harm, category = decode(output.harm_logits, output.category_logits, joint=True)
                 target = output.target_logits.argmax(dim=-1)

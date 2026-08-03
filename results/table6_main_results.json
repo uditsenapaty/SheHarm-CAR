@@ -1,0 +1,273 @@
+{
+  "config": "configs/default.yaml",
+  "seeds": [
+    42
+  ],
+  "models": {
+    "sheharm_car": {
+      "summary": {
+        "bertscore": {
+          "mean": 67.99165305069515,
+          "std": 0.0,
+          "n": 1
+        },
+        "best_dev_mean_f1": {
+          "mean": 42.83814228976372,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1": {
+          "mean": 51.53216458485993,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Appearance-Attack": {
+          "mean": 36.36363636363636,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Character-Assassination": {
+          "mean": 50.0,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Misogyny": {
+          "mean": 61.41732283464568,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Sexual-Harassment": {
+          "mean": 67.45562130177515,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Violence": {
+          "mean": 42.42424242424242,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_faithfulness": {
+          "mean": 59.251615537760614,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_necessity": {
+          "mean": 21.931802504092644,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_stability": {
+          "mean": 96.57142857142857,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1": {
+          "mean": 54.6041857430036,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Explicit-Harm": {
+          "mean": 46.913580246913575,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Implicit-Harm": {
+          "mean": 43.529411764705884,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Non-Harm": {
+          "mean": 73.36956521739131,
+          "std": 0.0,
+          "n": 1
+        },
+        "joint": {
+          "mean": 22.57142857142857,
+          "std": 0.0,
+          "n": 1
+        },
+        "joint_harmful": {
+          "mean": 13.855421686746986,
+          "std": 0.0,
+          "n": 1
+        },
+        "mean_confidence_drop": {
+          "mean": 14.998893084403658,
+          "std": 0.0,
+          "n": 1
+        },
+        "target_f1": {
+          "mean": 32.37082758021069,
+          "std": 0.0,
+          "n": 1
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "target_f1": 32.37082758021069,
+            "harm_f1": 54.6041857430036,
+            "category_f1": 51.53216458485993,
+            "joint": 22.57142857142857,
+            "joint_harmful": 13.855421686746986,
+            "harm_f1_Explicit-Harm": 46.913580246913575,
+            "harm_f1_Implicit-Harm": 43.529411764705884,
+            "harm_f1_Non-Harm": 73.36956521739131,
+            "category_f1_Sexual-Harassment": 67.45562130177515,
+            "category_f1_Violence": 42.42424242424242,
+            "category_f1_Misogyny": 61.41732283464568,
+            "category_f1_Appearance-Attack": 36.36363636363636,
+            "category_f1_Character-Assassination": 50.0,
+            "bertscore": 67.99165305069515,
+            "cf_faithfulness": 59.251615537760614,
+            "cf_necessity": 21.931802504092644,
+            "cf_stability": 96.57142857142857,
+            "mean_confidence_drop": 14.998893084403658,
+            "best_dev_mean_f1": 42.83814228976372
+          }
+        }
+      ],
+      "label": "\\textbf{SheHarm-CAR}",
+      "kind": "ours",
+      "note": ""
+    },
+    "roberta": {
+      "summary": {
+        "bertscore": {
+          "mean": 89.40956212793077,
+          "std": 0.0,
+          "n": 1
+        },
+        "best_dev_mean_f1": {
+          "mean": 27.768992353756314,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1": {
+          "mean": 39.66988012254575,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Appearance-Attack": {
+          "mean": 31.57894736842105,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Character-Assassination": {
+          "mean": 40.0,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Misogyny": {
+          "mean": 43.16546762589928,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Sexual-Harassment": {
+          "mean": 55.03355704697985,
+          "std": 0.0,
+          "n": 1
+        },
+        "category_f1_Violence": {
+          "mean": 28.57142857142857,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_faithfulness": {
+          "mean": 42.75250393450088,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_necessity": {
+          "mean": 21.790722154716043,
+          "std": 0.0,
+          "n": 1
+        },
+        "cf_stability": {
+          "mean": 63.714285714285715,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1": {
+          "mean": 46.46072270999712,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Explicit-Harm": {
+          "mean": 48.53556485355649,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Implicit-Harm": {
+          "mean": 44.33497536945813,
+          "std": 0.0,
+          "n": 1
+        },
+        "harm_f1_Non-Harm": {
+          "mean": 46.51162790697674,
+          "std": 0.0,
+          "n": 1
+        },
+        "joint": {
+          "mean": 5.714285714285714,
+          "std": 0.0,
+          "n": 1
+        },
+        "joint_harmful": {
+          "mean": 4.072398190045249,
+          "std": 0.0,
+          "n": 1
+        },
+        "mean_confidence_drop": {
+          "mean": 8.5997962685568,
+          "std": 0.0,
+          "n": 1
+        },
+        "target_f1": {
+          "mean": 8.619555685905071,
+          "std": 0.0,
+          "n": 1
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "target_f1": 8.619555685905071,
+            "harm_f1": 46.46072270999712,
+            "category_f1": 39.66988012254575,
+            "joint": 5.714285714285714,
+            "joint_harmful": 4.072398190045249,
+            "harm_f1_Explicit-Harm": 48.53556485355649,
+            "harm_f1_Implicit-Harm": 44.33497536945813,
+            "harm_f1_Non-Harm": 46.51162790697674,
+            "category_f1_Sexual-Harassment": 55.03355704697985,
+            "category_f1_Violence": 28.57142857142857,
+            "category_f1_Misogyny": 43.16546762589928,
+            "category_f1_Appearance-Attack": 31.57894736842105,
+            "category_f1_Character-Assassination": 40.0,
+            "bertscore": 89.40956212793077,
+            "cf_faithfulness": 42.75250393450088,
+            "cf_necessity": 21.790722154716043,
+            "cf_stability": 63.714285714285715,
+            "mean_confidence_drop": 8.5997962685568,
+            "best_dev_mean_f1": 27.768992353756314
+          }
+        }
+      ],
+      "label": "Text-only RoBERTa \\citep{liu2019roberta}",
+      "kind": "encoder:roberta_text",
+      "note": ""
+    }
+  },
+  "failures": {
+    "vilt": "RuntimeError: The expanded size of the tensor (128) must match the existing size (40) at non-singleton dimension 1.  Target sizes: [32, 128].  Tensor sizes: [1, 40]",
+    "hate_clipper": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77",
+    "kermit": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77",
+    "kid_vlm": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77",
+    "intmeme": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77",
+    "explainhm": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77",
+    "sgot_r1": "ValueError: Sequence length must be less than max_position_embeddings (got `sequence length`: 128 and max_position_embeddings: 77"
+  }
+}

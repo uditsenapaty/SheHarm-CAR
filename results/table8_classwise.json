@@ -1,0 +1,10 @@
+{
+  "source": "results/table6_main_results.json",
+  "per_class_f1": {
+    "sheharm_car": {
+      "Explicit-Harm": 46.913580246913575,
+      "Implicit-Harm": 43.529411764705884,
+      "Non-Harm": 73.36956521739131
+    }
+  }
+}

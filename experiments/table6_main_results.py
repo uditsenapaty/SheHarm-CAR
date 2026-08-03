@@ -47,7 +47,7 @@ ROSTER = {
 def run_trained(key: str, kind: str, config: dict, seeds: list[int], device) -> dict:
     builder = None if kind == "ours" else functools.partial(_baseline_builder, kind.split(":", 1)[1])
     runs = [
-        train_and_evaluate(config, seed, device, f"runs/table4/{key}/seed{seed}", model_builder=builder)
+        train_and_evaluate(config, seed, device, f"runs/table6/{key}/seed{seed}", model_builder=builder)
         for seed in seeds
     ]
     return {"summary": aggregate_seeds(runs),

@@ -64,3 +64,23 @@ images_*.tar.gz
 # 856 MB archive of the meme images (see the images entry above)
 images.zip
 *.zip
+
+# --- not part of the deliverable ---
+SheHarm-CAR.pdf
+SheHarm-CAR_UPTODATE.pdf
+SheHarm-CAR_latex/
+walkthrough.md
+referred_fetch.log
+
+# --- annotations: only the gold pass is published ---
+annotations.csv
+annotations1.csv
+dataset/annotations_raw.csv
+dataset/annotations_v2.csv
+dataset/annotations_part2.csv
+dataset/annotator1.csv
+dataset/annotations_sheharm.csv
+
+# --- provenance of the imported subset ---
+dataset/mapping.csv
+dataset/mami_sublabels.csv

@@ -48,12 +48,20 @@ class WeightEMA:
     as min(decay, (1+t)/(10+t)) so the first evaluations are not averages over noise.
     """
 
+    # Pretrained bulk: fine-tuned at 1e-5, so it barely moves and averaging it buys almost
+    # nothing while costing a full fp32 copy on the accelerator and another on the host.
+    # Averaging only the newly-initialised reasoning layers keeps the benefit at ~10% of the
+    # memory. On a 15 GB host the full version gets the process SIGKILLed mid-epoch.
+    PRETRAINED_PREFIXES = ("encoder.vision.", "encoder.text.", "rationale_decoder.decoder.",
+                           "rationale_decoder.lm_head.")
+
     def __init__(self, model: nn.Module, decay: float = 0.99):
         self.decay = decay
         self.step = 0
         self.shadow = {
             name: parameter.detach().clone().float()
-            for name, parameter in model.named_parameters() if parameter.requires_grad
+            for name, parameter in model.named_parameters()
+            if parameter.requires_grad and not name.startswith(self.PRETRAINED_PREFIXES)
         }
         self.backup: dict[str, torch.Tensor] = {}
 
