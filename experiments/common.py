@@ -94,6 +94,8 @@ def build_model(config: dict, tokenizer, device: torch.device) -> SheHarmCAR:
         freeze_encoders=model_config["freeze_encoders"],
         cross_modal_layers=model_config.get("cross_modal_layers", 2),
         tied_target_head=model_config.get("tied_target_head", True),
+        rationale_decoder=model_config.get("rationale_decoder", "bart"),
+        rationale_model=model_config.get("rationale_model", "facebook/bart-base"),
         cf_margin=model_config["cf_margin"],
         use_target_conditioning=model_config["use_target_conditioning"],
         use_ontology_retrieval=model_config["use_ontology_retrieval"],

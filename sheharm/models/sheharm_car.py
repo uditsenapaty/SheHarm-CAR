@@ -24,7 +24,7 @@ from .. import losses as loss_fn
 from ..labels import CATEGORY_LABELS, HARMFULNESS_LABELS
 from .encoders import MultimodalEncoder
 from .fusion import ConfidenceGatedFusion
-from .rationale import RationaleDecoder
+from .rationale import PretrainedRationaleDecoder, RationaleDecoder
 from .reasoner import SoftRuleReasoner
 from .retriever import OntologyRetriever
 from .target_head import TargetIdentifier
@@ -68,6 +68,8 @@ class SheHarmCAR(nn.Module):
         freeze_encoders: bool = False,
         cross_modal_layers: int = 2,
         tied_target_head: bool = True,
+        rationale_decoder: str = "bart",   # "bart" (pretrained) or "scratch"
+        rationale_model: str = "facebook/bart-base",
         # Public benchmarks (Table `tab:cross_dataset`) are binary, and only the objectives
         # they support are optimised: "we retain the multimodal, ontology, rule-reasoning and
         # confidence-gated components and optimize only the supported classification objectives".
@@ -110,9 +112,14 @@ class SheHarmCAR(nn.Module):
             hidden_size, num_harm_classes, len(CATEGORY_LABELS), dropout,
             use_target_conditioning, use_ontology_retrieval, use_confidence_gate,
         )
-        self.rationale_decoder = RationaleDecoder(
-            vocab_size, hidden_size, 2, 8, dropout, max_rationale_len, pad_token_id
-        )
+        if rationale_decoder == "bart":
+            self.rationale_decoder = PretrainedRationaleDecoder(
+                rationale_model, hidden_size, max_rationale_len, pad_token_id
+            )
+        else:
+            self.rationale_decoder = RationaleDecoder(
+                vocab_size, hidden_size, 2, 8, dropout, max_rationale_len, pad_token_id
+            )
 
         self.pad_token_id = pad_token_id
         self.beam_size = beam_size

@@ -149,10 +149,20 @@ def main() -> int:
         assert not missing, f"missing losses: {missing}"
         for name, value in output.losses.items():
             assert torch.isfinite(value), f"{name} is {value}"
-        # At initialisation a cross-entropy head should sit at ln(num_classes). These three
+        # At initialisation a cross-entropy head should sit at ln(num_classes). These
         # average over enough classes to be stable, and catch bad initialisation (e.g. a
         # tied lm_head inheriting nn.Embedding's N(0,1) default).
-        for name, classes in (("rationale", 50265), ("target", 126), ("alignment", 11)):
+        #
+        # The rationale head is exempt when the decoder is pretrained: BART carries a strong
+        # English prior, so it neither starts at ln(vocab) nor should be expected to - and on
+        # the random token ids used here it scores *worse* than uniform, which says nothing
+        # about the model. It is checked for finiteness instead.
+        checks = [("target", 126), ("alignment", 11)]
+        if type(model.rationale_decoder).__name__ == "RationaleDecoder":
+            checks.append(("rationale", 50265))
+        else:
+            assert 0.0 < output.losses["rationale"].item() < 40.0, output.losses["rationale"]
+        for name, classes in checks:
             expected = np.log(classes)
             observed = output.losses[name].item()
             assert 0.7 * expected < observed < 1.4 * expected, (

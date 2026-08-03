@@ -31,6 +31,10 @@ model:
   cross_modal_layers: 3
   # entity-linking target head: score the mention against concept embeddings
   tied_target_head: true
+  # pretrained rationale decoder: BART-base shares RoBERTa's vocabulary and d_model,
+  # and its cross-attention is pretrained. "scratch" restores the from-scratch decoder.
+  rationale_decoder: bart
+  rationale_model: facebook/bart-base
 
   # Ablation switches (Table `tab:ablation`); all true in the full model.
   use_target_conditioning: true
