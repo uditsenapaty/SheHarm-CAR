@@ -67,6 +67,7 @@ class SheHarmCAR(nn.Module):
         text_model: str = "roberta-base",
         freeze_encoders: bool = False,
         cross_modal_layers: int = 2,
+        tied_target_head: bool = True,
         # Public benchmarks (Table `tab:cross_dataset`) are binary, and only the objectives
         # they support are optimised: "we retain the multimodal, ontology, rule-reasoning and
         # confidence-gated components and optimize only the supported classification objectives".
@@ -95,7 +96,9 @@ class SheHarmCAR(nn.Module):
         self.encoder = MultimodalEncoder(
             vision_model, text_model, hidden_size, 8, dropout, freeze_encoders, cross_modal_layers
         )
-        self.target_head = TargetIdentifier(target_embeddings, hidden_size, dropout)
+        self.target_head = TargetIdentifier(
+            target_embeddings, hidden_size, dropout, tied_classifier=tied_target_head
+        )
         self.retriever = OntologyRetriever(
             concept_embeddings, hidden_size, top_k, temperature, num_hard_negatives
         )

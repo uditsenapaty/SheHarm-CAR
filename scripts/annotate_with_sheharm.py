@@ -33,6 +33,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "experiments"))
 
 from common import build_datasets, build_model, build_tokenizer_and_processor, load_config, resolve_device  # noqa: E402
+from sheharm.decoding import decode  # noqa: E402
 from sheharm.labels import CATEGORY_LABELS, HARMFULNESS_LABELS, NON_HARM_ID  # noqa: E402
 from sheharm.trainer import enable_determinism  # noqa: E402
 
@@ -79,8 +80,7 @@ def main() -> int:
                     pixel_values=tensors["pixel_values"], input_ids=tensors["input_ids"],
                     attention_mask=tensors["attention_mask"], compute_counterfactuals=False,
                 )
-                harm = output.harm_logits.argmax(dim=-1)
-                category = output.category_logits.argmax(dim=-1)
+                harm, category = decode(output.harm_logits, output.category_logits, joint=True)
                 target = output.target_logits.argmax(dim=-1)
                 generated = model.generate_rationale(
                     output.extras["memory"], tokenizer.bos_token_id or tokenizer.cls_token_id,

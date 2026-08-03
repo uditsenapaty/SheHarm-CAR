@@ -25,14 +25,27 @@ class TargetIdentifier(nn.Module):
         hidden_size: int = 768,
         dropout: float = 0.2,
         learnable_embeddings: bool = True,
+        tied_classifier: bool = True,
     ):
         super().__init__()
         num_targets, embedding_dim = target_embeddings.shape
         self.num_targets = num_targets
-        self.classifier = nn.Sequential(
-            nn.Dropout(dropout),
-            nn.Linear(hidden_size, num_targets),
-        )
+        self.tied = tied_classifier
+        if tied_classifier:
+            # Entity linking: score a mention against every concept embedding rather than
+            # learning an independent weight vector per class. Still exactly
+            # p^t = softmax(W_t z + b_t) - W_t is the composition of the mention projection
+            # with the concept matrix - but the weights start semantically meaningful and
+            # rare concepts inherit structure from related ones instead of learning from
+            # their handful of examples alone.
+            self.mention = nn.Sequential(nn.Dropout(dropout), nn.Linear(hidden_size, embedding_dim))
+            self.link_bias = nn.Parameter(torch.zeros(num_targets))
+            self.link_scale = nn.Parameter(torch.tensor(1.0 / embedding_dim**0.5))
+        else:
+            self.classifier = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(hidden_size, num_targets),
+            )
         # Concept embeddings start from the ontology text encodings and are refined during training.
         if learnable_embeddings:
             self.concept_embeddings = nn.Parameter(target_embeddings.clone())
@@ -41,7 +54,10 @@ class TargetIdentifier(nn.Module):
         self.project = nn.Linear(embedding_dim, hidden_size) if embedding_dim != hidden_size else nn.Identity()
 
     def forward(self, z: torch.Tensor, hard: bool = False):
-        logits = self.classifier(z)
+        if self.tied:
+            logits = self.mention(z) @ self.concept_embeddings.t() * self.link_scale + self.link_bias
+        else:
+            logits = self.classifier(z)
         probabilities = F.softmax(logits, dim=-1)
         if hard:
             index = probabilities.argmax(dim=-1)

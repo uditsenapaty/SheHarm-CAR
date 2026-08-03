@@ -11,6 +11,7 @@ import torch
 import torch.nn.functional as F
 
 from . import metrics as metric_lib
+from .decoding import decode
 from .labels import IGNORE_INDEX
 
 # CF-Faith appears in Table 4 for every baseline too, so the intervention used to compute it
@@ -23,7 +24,7 @@ IRRELEVANT_INTERVENTION = "mask_irrelevant_region"
 
 @torch.no_grad()
 def predict(model, loader, tokenizer, device, compute_rationales: bool = True,
-            compute_counterfactuals: bool = True) -> dict:
+            compute_counterfactuals: bool = True, joint_decoding: bool = True) -> dict:
     model.eval()
     collected = {
         "target_true": [], "target_pred": [], "harm_true": [], "harm_pred": [],
@@ -47,14 +48,16 @@ def predict(model, loader, tokenizer, device, compute_rationales: bool = True,
             compute_counterfactuals=False,
         )
         harm_probabilities = F.softmax(output.harm_logits, dim=-1)
-        harm_prediction = harm_probabilities.argmax(dim=-1)
+        harm_prediction, category_prediction = decode(
+            output.harm_logits, output.category_logits, joint=joint_decoding
+        )
 
         collected["target_true"].extend(batch["target_labels"].cpu().tolist())
         collected["target_pred"].extend(output.target_logits.argmax(dim=-1).cpu().tolist())
         collected["harm_true"].extend(batch["harm_labels"].cpu().tolist())
         collected["harm_pred"].extend(harm_prediction.cpu().tolist())
         collected["category_true"].extend(batch["cat_labels"].cpu().tolist())
-        collected["category_pred"].extend(output.category_logits.argmax(dim=-1).cpu().tolist())
+        collected["category_pred"].extend(category_prediction.cpu().tolist())
         collected["gamma"].extend(output.gamma.cpu().tolist())
         collected["max_activation"].extend(output.extras["max_activation"].cpu().tolist())
 
@@ -91,10 +94,12 @@ def predict(model, loader, tokenizer, device, compute_rationales: bool = True,
 
 
 def evaluate(model, loader, tokenizer, device, compute_bertscore: bool = True,
-             compute_counterfactuals: bool = True, bertscore_model: str = "roberta-large") -> dict:
+             compute_counterfactuals: bool = True, bertscore_model: str = "roberta-large",
+             joint_decoding: bool = True) -> dict:
     outputs = predict(
         model, loader, tokenizer, device,
         compute_rationales=compute_bertscore, compute_counterfactuals=compute_counterfactuals,
+        joint_decoding=joint_decoding,
     )
     return metric_lib.summarize(
         outputs["predictions"],

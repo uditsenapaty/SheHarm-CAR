@@ -29,6 +29,7 @@ model:
   cf_margin: 0.10
   # Paper-silent: it specifies bidirectional cross-modal attention but not its depth.
   cross_modal_layers: 1
+  tied_target_head: false
 
   # Ablation switches (Table `tab:ablation`); all true in the full model.
   use_target_conditioning: true

@@ -93,6 +93,7 @@ def build_model(config: dict, tokenizer, device: torch.device) -> SheHarmCAR:
         text_model=model_config["text_model"],
         freeze_encoders=model_config["freeze_encoders"],
         cross_modal_layers=model_config.get("cross_modal_layers", 2),
+        tied_target_head=model_config.get("tied_target_head", True),
         cf_margin=model_config["cf_margin"],
         use_target_conditioning=model_config["use_target_conditioning"],
         use_ontology_retrieval=model_config["use_ontology_retrieval"],

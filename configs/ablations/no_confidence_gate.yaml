@@ -29,6 +29,8 @@ model:
   cf_margin: 0.10
   # Paper-silent: it specifies bidirectional cross-modal attention but not its depth.
   cross_modal_layers: 3
+  # entity-linking target head: score the mention against concept embeddings
+  tied_target_head: true
 
   # Ablation switches (Table `tab:ablation`); all true in the full model.
   use_target_conditioning: true
