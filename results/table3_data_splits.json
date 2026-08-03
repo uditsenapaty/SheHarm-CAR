@@ -1,79 +1,80 @@
 {
-  "total": 910,
+  "total": 625,
   "splits": {
-    "train": 726,
-    "test": 92,
-    "dev": 92
+    "train": 498,
+    "dev": 64,
+    "test": 63
   },
   "harmfulness": {
-    "Non-Harm": 687,
-    "Implicit-Harm": 141,
-    "Explicit-Harm": 82
+    "Non-Harm": 392,
+    "Implicit-Harm": 148,
+    "Explicit-Harm": 85
   },
   "harm_category": {
-    "None": 687,
-    "Sexual-Harassment": 163,
-    "Misogyny": 33,
-    "Appearance-Attack": 19,
-    "Violence": 8
+    "None": 392,
+    "Sexual-Harassment": 164,
+    "Misogyny": 37,
+    "Appearance-Attack": 23,
+    "Violence": 9
   },
   "split_by_harmfulness": {
     "Explicit-Harm": {
-      "train": 64,
+      "train": 67,
       "dev": 9,
       "test": 9,
-      "Total": 82
+      "Total": 85
     },
     "Implicit-Harm": {
-      "train": 113,
-      "dev": 14,
-      "test": 14,
-      "Total": 141
+      "train": 117,
+      "dev": 16,
+      "test": 15,
+      "Total": 148
     },
     "Non-Harm": {
-      "train": 549,
-      "dev": 69,
-      "test": 69,
-      "Total": 687
+      "train": 314,
+      "dev": 39,
+      "test": 39,
+      "Total": 392
     },
     "Total": {
-      "train": 726,
-      "dev": 92,
-      "test": 92,
-      "Total": 910
+      "train": 498,
+      "dev": 64,
+      "test": 63,
+      "Total": 625
     }
   },
   "split_by_category": {
     "Appearance-Attack": {
-      "dev": 2,
-      "test": 2,
-      "train": 15
+      "dev": 3,
+      "test": 3,
+      "train": 17
     },
     "Misogyny": {
-      "dev": 4,
+      "dev": 5,
       "test": 4,
-      "train": 25
+      "train": 28
     },
     "None": {
-      "dev": 69,
-      "test": 69,
-      "train": 549
+      "dev": 39,
+      "test": 39,
+      "train": 314
     },
     "Sexual-Harassment": {
       "dev": 16,
       "test": 16,
-      "train": 131
+      "train": 132
     },
     "Violence": {
       "dev": 1,
       "test": 1,
-      "train": 6
+      "train": 7
     }
   },
-  "target_concepts_attested": 54,
-  "rows_without_target_concept": 128,
-  "rows_with_grounded_span": 572,
-  "span_grounding_rate": 62.86,
-  "rows_with_empty_ocr": 11,
+  "target_concepts_attested": 43,
+  "rows_without_target_concept": 51,
+  "rows_with_grounded_span": 425,
+  "span_grounding_rate": 68.0,
+  "rows_with_empty_ocr": 5,
+  "rows_with_human_labels": 0,
   "strata_too_small_for_dev_test": {}
 }

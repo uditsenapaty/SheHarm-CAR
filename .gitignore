@@ -52,3 +52,9 @@ referred_clones/qwen25_vl/cookbooks/assets/spatial_understanding/lots_of_cars.pn
 referred_clones/qwen25_vl/cookbooks/document_parsing.ipynb
 referred_clones/internvl/internvl_chat/eval/mmiu/mmiu.jsonl
 referred_clones/explainhm/data/multimodal_debate.zip
+
+# dropped memes, moved aside rather than deleted (recoverable, not redistributed)
+dataset/_removed/
+
+# imported source archive (already copied into dataset/images/, 172 MB)
+WomenHarmfulOnly1000/
